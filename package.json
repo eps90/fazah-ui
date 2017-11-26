@@ -3,5 +3,11 @@
   "version": "0.0.0",
   "main": "index.js",
   "author": "Kuba Turek <ja@kubaturek.pl>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "webpack": "^3.8.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^2.9.4"
+  }
 }
