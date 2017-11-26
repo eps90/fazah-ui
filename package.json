@@ -1,0 +1,7 @@
+{
+  "name": "fazah-ui",
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": "Kuba Turek <ja@kubaturek.pl>",
+  "license": "MIT"
+}
