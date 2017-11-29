@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "jest": "^21.2.1",
+    "webpack-clean-plugin": "^0.2.3",
     "webpack-dev-server": "^2.9.4"
   }
 }
