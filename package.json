@@ -4,6 +4,12 @@
   "main": "index.js",
   "author": "Kuba Turek <ja@kubaturek.pl>",
   "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "test": "jest",
+    "build:dev": "webpack -d",
+    "build:prod": "webpack -p"
+  },
   "dependencies": {
     "react": "^16.1.1",
     "react-dom": "^16.1.1"
