@@ -15,6 +15,23 @@ module.exports = {
         loaders: [
             {
                 test: /\.js/, loader: 'babel-loader', exclude: /node_modules/
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            includePaths: ['./node_modules', './node_modules/grommet/node_modules']
+                        }
+                    }
+                ]
             }
         ]
     },
