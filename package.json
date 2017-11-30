@@ -11,6 +11,7 @@
     "build:prod": "webpack -p"
   },
   "dependencies": {
+    "grommet": "^1.9.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1"
   },
