@@ -1,22 +1,21 @@
 import React from 'react';
-import Logo from './header/Logo';
-import SearchBar from './header/SearchBar';
-import ProfileButton from './header/ProfileButton';
-import ProjectsListContainer from './main/ProjectsListContainer'
+import GrommetApp from 'grommet/components/App';
+import Split from "grommet/components/Split";
+import Box from 'grommet/components/Box';
+import Sidebar from "./sidebar/Sidebar";
+import Main from "./main/Main";
 
 export default class App extends React.Component {
     render() {
         return (
-            <div>
-                <section className="header">
-                    <Logo />
-                    <SearchBar />
-                    <ProfileButton />
-                </section>
-                <section className="main">
-                    <ProjectsListContainer />
-                </section>
-            </div>
+            <GrommetApp centered={false}>
+                <Box full={true}>
+                    <Split fixed={true} flex='right'>
+                        <Sidebar />
+                        <Main/>
+                    </Split>
+                </Box>
+            </GrommetApp>
         );
     }
 }
