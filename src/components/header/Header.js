@@ -7,8 +7,8 @@ import GrommetHeader from 'grommet/components/Header';
 export default class Header extends React.Component {
     render() {
         return (
-            <Box pad='small'>
-                <GrommetHeader>
+            <Box>
+                <GrommetHeader colorIndex='neutral-1-t' pad='medium'>
                     <SearchBar/>
                     <ProfileButton />
                 </GrommetHeader>

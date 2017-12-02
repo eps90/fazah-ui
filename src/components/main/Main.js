@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from "../header/Header";
-import Article from "grommet/components/Article";
 import ProjectsListContainer from "./ProjectsListContainer";
 import Box from "grommet/components/Box";
 
@@ -9,9 +8,9 @@ export default class Main extends React.Component {
         return (
             <Box>
                 <Header />
-                <Article>
+                <Box pad='medium'>
                     <ProjectsListContainer />
-                </Article>
+                </Box>
             </Box>
         )
     }
