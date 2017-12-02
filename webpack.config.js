@@ -32,6 +32,11 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.svg$/,
+                use: "svg-react-loader",
+                exclude: /node_modules/
             }
         ]
     },
