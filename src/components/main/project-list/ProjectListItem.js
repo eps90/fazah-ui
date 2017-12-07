@@ -2,6 +2,8 @@ import React from 'react';
 
 export default class ProjectListItem extends React.Component {
     render() {
-        return <h1>Hello</h1>;
+        return (
+            <span className='project-list-item'>{this.props.project.name}</span>
+        )
     }
 }
