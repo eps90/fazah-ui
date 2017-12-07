@@ -3,6 +3,7 @@ import ProjectListItem from "./ProjectListItem";
 import Message from "../message/Message";
 import List from "grommet/components/List";
 import ListItem from "grommet/components/ListItem";
+import Title from "grommet/components/Title";
 
 export default class ProjectList extends React.Component {
     constructor(props) {
@@ -10,17 +11,22 @@ export default class ProjectList extends React.Component {
     }
 
     render() {
-        let result;
+        let contents;
         if (!this.props.projects || this.props.projects.length === 0) {
-            result = <Message status='disabled' message='No projects to show' />;
+            contents = <Message status='disabled' message='No projects to show' />;
         } else {
-            result = <List>
+            contents = <List>
                 {this.props.projects.map((el) =>
                     <ListItem key={el.id}><ProjectListItem project={el} /></ListItem>
                 )}
             </List>;
         }
 
-        return result;
+        return (
+            <div>
+                <Title>Projects list</Title>
+                {contents}
+            </div>
+        );
     }
 }
