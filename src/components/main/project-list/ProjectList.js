@@ -4,20 +4,16 @@ import Message from "../message/Message";
 import List from "grommet/components/List";
 import ListItem from "grommet/components/ListItem";
 import Title from "grommet/components/Title";
-import PropTypes from 'prop-types';
+import Project from "../../../model/Project";
 
-export default class ProjectList extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    static propTypes = {
-        projects: PropTypes.array.isRequired
+export default class ProjectList extends React.Component<Props> {
+    props: {
+        projects: Project[]
     };
 
     render() {
         let contents;
-        if (!this.props.projects || this.props.projects.length === 0) {
+        if (this.props.projects.length === 0) {
             contents = <Message status='disabled' message='No projects to show' />;
         } else {
             contents = <List>
