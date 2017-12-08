@@ -4,11 +4,16 @@ import Message from "../message/Message";
 import List from "grommet/components/List";
 import ListItem from "grommet/components/ListItem";
 import Title from "grommet/components/Title";
+import PropTypes from 'prop-types';
 
 export default class ProjectList extends React.Component {
     constructor(props) {
         super(props);
     }
+
+    static propTypes = {
+        projects: PropTypes.array.isRequired
+    };
 
     render() {
         let contents;

@@ -19,5 +19,5 @@ describe('ProjectList component', () => {
         const projects = [];
         const wrapper = shallow(<ProjectList projects={projects}/>);
         expect(wrapper.find(Message)).toHaveLength(1);
-    })
+    });
 });
