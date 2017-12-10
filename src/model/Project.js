@@ -14,4 +14,13 @@ export default class Project {
         this.metadata = metadata;
         this.availableLanguages = availableLanguages;
     }
+
+    static fromJson(rawObj): Project {
+        return new Project(
+            rawObj['id'],
+            rawObj['name'],
+            Metadata.fromJson(rawObj['metadata']),
+            rawObj['config']['available_languages']
+        );
+    }
 }

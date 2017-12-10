@@ -5,7 +5,7 @@ export default class Metadata {
     _updatedAt: Date;
     _enabled: boolean;
 
-    constructor(createdAt: Date, updatedAt: Date, enabled: boolean) {
+    constructor(createdAt: Date, updatedAt: ?Date, enabled: boolean) {
         this._createdAt = createdAt;
         this._updatedAt = updatedAt;
         this._enabled = enabled;
@@ -25,5 +25,13 @@ export default class Metadata {
 
     static empty() {
         return new this(new Date(), new Date(), true);
+    }
+
+    static fromJson(rawObj): Metadata {
+        return new Metadata(
+            new Date(rawObj['creation_time']),
+            rawObj['update_time'] ? new Date(rawObj['update_time']) : null,
+            rawObj['enabled']
+        );
     }
 }
