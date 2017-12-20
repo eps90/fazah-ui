@@ -39,18 +39,19 @@ describe('withProject HOC', () => {
     });
 
 
-    it('should render an error when request fails', () => {
+    it('should render an error when request fails', (done) => {
         __failWhileFetchingProjects();
 
         expect.assertions(1);
         const Wrapped = withProjects(TestComponent);
 
         const wrappedInstance = shallow(<Wrapped />);
-        return fetchProjects().then().catch(() => {
+        setImmediate(() => {
             wrappedInstance.update();
 
             const messageInstance = wrappedInstance.find(Message);
             expect(messageInstance.length).toEqual(1);
+            done();
         });
     });
 });
