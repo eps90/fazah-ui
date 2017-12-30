@@ -11,6 +11,6 @@ export function* fetchProjectList() {
     }
 }
 
-export default function* watchProjectRequested() {
+export default function* watchProjects() {
     yield takeLatest(PROJECTS_REQUESTED, fetchProjectList);
 }

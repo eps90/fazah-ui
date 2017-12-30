@@ -1,50 +1,58 @@
-import {runSaga} from "redux-saga";
-import {failProjectListing, setProjects} from "./actions";
+import {expectSaga, testSaga} from "redux-saga-test-plan";
+import * as matchers from 'redux-saga-test-plan/matchers';
+import {throwError} from "redux-saga-test-plan/providers";
+import {failProjectListing, listProjects, setProjects} from "./actions";
+import watchProjects, {fetchProjectList} from "./sagas";
+import {fetchProjects} from "../../service/repository/project";
 
 describe('projects sagas', () => {
-    beforeEach(() => {
-        jest.resetModules();
+    describe('unit', () => {
+        it('should dispatch action with fetched projects', () => {
+            const projectsFetched = [{id: 1}, {id: 2}];
+            testSaga(fetchProjectList)
+                .next()
+                .call(fetchProjects)
+                .next(projectsFetched)
+                .put(setProjects(projectsFetched))
+                .next()
+                .isDone();
+        });
+
+        it('should dispatch error action when fetching projects fails', () => {
+            testSaga(fetchProjectList)
+                .next()
+                .call(fetchProjects)
+                .throw()
+                .put(failProjectListing())
+                .next()
+                .isDone();
+        });
     });
 
-    it('should set fetched projects', async () => {
-        expect.assertions(1);
+    describe('integration', () => {
+        it('should dispatch fetched projects', () => {
+            const projectsFetched = [
+                {id: 1, name: 'My first project'},
+                {id: 2, name: 'My second project'}
+            ];
 
-        const projects = [
-            {id: 1, name: 'My first project'},
-            {id: 2, name: 'My second project'}
-        ];
-        const fetchProjectList = createSagaMock(projects);
+            return expectSaga(watchProjects)
+                .provide([
+                    [matchers.call.fn(fetchProjects), projectsFetched]
+                ])
+                .put(setProjects(projectsFetched))
+                .dispatch(listProjects())
+                .silentRun();
+        });
 
-        const dispatchedActions = [];
-        await runSaga({dispatch: (action) => dispatchedActions.push(action)}, fetchProjectList).done;
-
-        expect(dispatchedActions).toEqual([setProjects(projects)]);
+        it('should dispatch error when fetching projects fails', () => {
+            return expectSaga(watchProjects)
+                .provide([
+                    [matchers.call.fn(fetchProjects), throwError('Fetching projects failed!')]
+                ])
+                .put(failProjectListing())
+                .dispatch(listProjects())
+                .silentRun();
+        });
     });
-
-    it('should dispatch error action when fetching projects fails', async () => {
-        expect.assertions(1);
-
-        const fetchProjectList = createFailingSagaMock();
-
-        const dispatchedActions = [];
-        await runSaga({dispatch: (action) => dispatchedActions.push(action)}, fetchProjectList).done;
-
-        expect(dispatchedActions).toEqual([failProjectListing()]);
-    });
-
-    function createSagaMock(projectsToReturn) {
-        jest.doMock("../../service/repository/project", () => ({
-            fetchProjects: () => Promise.resolve(projectsToReturn)
-        }));
-
-        return require('./sagas').fetchProjectList;
-    }
-
-    function createFailingSagaMock() {
-        jest.doMock("../../service/repository/project", () => ({
-            fetchProjects: () => Promise.reject()
-        }));
-
-        return require('./sagas').fetchProjectList;
-    }
 });
