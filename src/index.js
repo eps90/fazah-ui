@@ -1,13 +1,19 @@
+import 'babel-polyfill';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import {createStore} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import {Provider} from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
 import reducers from './containers/reducers';
+import sagas from './containers/sagas';
 
 import 'grommet/scss/vanilla/index.scss';
 
-const store = createStore(reducers);
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(reducers, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(sagas);
 
 ReactDOM.render(
     <Provider store={store}>
