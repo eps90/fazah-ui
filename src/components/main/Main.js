@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from "../header/Header";
-import ProjectsListContainer from "./ProjectsListContainer";
 import Box from "grommet/components/Box";
+import ProjectListContainer from "../../containers/project/ProjectListContainer";
 
 export default class Main extends React.Component {
     render() {
@@ -9,7 +9,7 @@ export default class Main extends React.Component {
             <Box>
                 <Header />
                 <Box pad='medium'>
-                    <ProjectsListContainer />
+                    <ProjectListContainer />
                 </Box>
             </Box>
         )
