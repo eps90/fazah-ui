@@ -6,8 +6,8 @@ import App from './components/App';
 import {applyMiddleware, createStore} from 'redux';
 import {Provider} from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import reducers from './containers/reducers';
-import sagas from './containers/sagas';
+import reducers from './store/reducers';
+import sagas from './store/sagas';
 
 import 'grommet/scss/vanilla/index.scss';
 
