@@ -1,9 +1,9 @@
 // @flow
 
 import fetchMock from 'fetch-mock';
-import Project from "../../../src/model/Project";
-import Metadata from "../../../src/model/Metadata";
-import {fetchProjects} from "../../../src/service/repository/project";
+import Project from "../../model/Project";
+import Metadata from "../../model/Metadata";
+import {fetchProjects} from "./project";
 
 describe('Fetching projects', () => {
     afterEach(() => {

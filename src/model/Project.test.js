@@ -1,5 +1,5 @@
-import Project from "../../src/model/Project";
-import Metadata from "../../src/model/Metadata";
+import Project from "./Project";
+import Metadata from "./Metadata";
 
 describe('Project', () => {
     it('should parse raw object into Project instance', () => {

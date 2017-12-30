@@ -1,6 +1,6 @@
 // @flow
 
-import Metadata from "../../src/model/Metadata";
+import Metadata from "./Metadata";
 
 describe('Metadata', () => {
     it('should parse raw metadata into object', () => {

@@ -1,9 +1,9 @@
 import React from 'react';
 import {shallow} from "enzyme";
-import ProjectList from "../../../../src/components/main/project-list/ProjectList";
-import ProjectListItem from "../../../../src/components/main/project-list/ProjectListItem";
-import Project from "../../../../src/model/Project";
-import Message from "../../../../src/components/main/message/Message";
+import ProjectList from "./ProjectList";
+import ProjectListItem from "./ProjectListItem";
+import Project from "../../../model/Project";
+import Message from "../message/Message";
 
 describe('ProjectList component', () => {
     test('should render a list of provided projects', () => {
