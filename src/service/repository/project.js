@@ -1,10 +1,11 @@
 // @flow
 
 import Project from "../../model/Project";
+import {API_URL} from './../../constants';
 import 'whatwg-fetch';
 
 export function fetchProjects(): Promise<Project[]> {
-    return fetch('/projects.json')
+    return fetch(`${API_URL}/api/projects.json`)
         .then((response) => {
             return response.json();
         })

@@ -13,15 +13,15 @@ describe('Fetching projects', () => {
     it('should send a request to the server', () => {
         expect.assertions(1);
 
-        fetchMock.get('end:/projects.json', getSampleServerResponse());
+        fetchMock.get('end:/api/projects.json', getSampleServerResponse());
         return fetchProjects().then(() => {
-            expect(fetchMock.called('end:/projects.json')).toBe(true);
+            expect(fetchMock.called('end:/api/projects.json')).toBe(true);
         });
     });
 
     it('should return a list of all projects', () => {
         expect.assertions(1);
-        fetchMock.get('end:/projects.json', getSampleServerResponse());
+        fetchMock.get('end:/api/projects.json', getSampleServerResponse());
 
         return fetchProjects().then(actualResult => {
             expect(actualResult).toEqual(getParsedProjects());
@@ -30,7 +30,7 @@ describe('Fetching projects', () => {
 
     it('should return an empty array in case of no project', () => {
         expect.assertions(1);
-        fetchMock.get('end:/projects.json', []);
+        fetchMock.get('end:/api/projects.json', []);
 
         return fetchProjects().then(actualResult => {
             const expectedResult = [];
@@ -40,7 +40,7 @@ describe('Fetching projects', () => {
 
     it('should return an empty array in case when server response is wrongly formatted', () => {
         expect.assertions(1);
-        fetchMock.get('end:/projects.json', {someKey: 'someValue'});
+        fetchMock.get('end:/api/projects.json', {someKey: 'someValue'});
 
         return fetchProjects().then(actualResponse => {
             const expectedResult = [];
