@@ -8,8 +8,13 @@ import Project from "../../../model/Project";
 
 export default class ProjectList extends React.Component<Props> {
     props: {
-        projects: Project[]
+        projects: Project[],
+        listProjects: Function
     };
+
+    componentWillMount() {
+        this.props.listProjects();
+    }
 
     render() {
         let contents;
