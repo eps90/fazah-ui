@@ -13,7 +13,7 @@ describe('ProjectListContainer', () => {
             {id: 1, name: 'My first project'},
             {id: 2, name: 'My second project'},
         ];
-        const component = createComponentWithProjects(projects);
+        const component = createComponentWithState(projects);
 
         const wrapper = mount(component);
         expect(wrapper.find(ProjectList).first().props().projects).toEqual(projects);
@@ -24,16 +24,25 @@ describe('ProjectListContainer', () => {
             listProjects: jest.fn()
         });
 
-        const component = createComponentWithProjects();
+        const component = createComponentWithState();
         const wrapper = mount(component);
 
         expect(wrapper.find(ProjectList).first().props().listProjects).toBeDefined();
     });
 
-    function createComponentWithProjects(projects = []) {
+    it('it should pass loading state to ProjectList component', () => {
+        const isLoading = true;
+        const component = createComponentWithState([], isLoading);
+        const wrapper = mount(component);
+
+         expect(wrapper.find(ProjectList).first().props().loading).toBeTruthy();
+    });
+
+    function createComponentWithState(items = [], loading = false) {
         const initialState = {
             projects: {
-                items: projects
+                loading,
+                items
             }
         };
         const store = mockStore(initialState);
