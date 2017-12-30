@@ -6,7 +6,6 @@
     ],
     "plugins": [
         "transform-class-properties",
-        "react-flow-props-to-prop-types",
         "transform-object-rest-spread",
         "transform-async-to-generator"
     ]
