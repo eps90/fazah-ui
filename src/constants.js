@@ -1,7 +1,6 @@
 let apiUrl = '';
 
-if (process.env.NODE_ENV === 'PRODUCTION') {
-    console.log('In production');
+if (process.env.NODE_ENV === 'production') {
     apiUrl = 'http://localhost:8082';
 }
 
