@@ -7,6 +7,10 @@ import 'whatwg-fetch';
 export function fetchProjects(): Promise<Project[]> {
     return fetch(`${API_URL}/api/projects.json`)
         .then((response) => {
+            if (!response.ok) {
+                throw new Error('Error fetching projects');
+            }
+
             return response.json();
         })
         .then((jsonResponse) => {

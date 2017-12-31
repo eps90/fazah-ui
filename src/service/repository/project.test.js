@@ -45,7 +45,16 @@ describe('Fetching projects', () => {
         return fetchProjects().then(actualResponse => {
             const expectedResult = [];
             expect(actualResponse).toEqual(expectedResult);
-        })
+        });
+    });
+
+    it('should throw an error when server returns an error status code', () => {
+        expect.assertions(1);
+
+        fetchMock.get('end:/api/projects.json', {status: 503, body: getSampleServerResponse()});
+        return fetchProjects().catch(err => {
+            expect(err).toBeDefined();
+        });
     });
 });
 
