@@ -38,11 +38,20 @@ describe('ProjectListContainer', () => {
          expect(wrapper.find(ProjectList).first().props().loading).toBeTruthy();
     });
 
-    function createComponentWithState(items = [], loading = false) {
+    it('should pass an error to ProjectList component', () => {
+        const error = true;
+        const component = createComponentWithState([], false, error);
+        const wrapper = mount(component);
+
+        expect(wrapper.find(ProjectList).first().props().hasError).toEqual(error);
+    });
+
+    function createComponentWithState(items = [], loading = false, error = false) {
         const initialState = {
             projects: {
                 loading,
-                items
+                items,
+                error
             }
         };
         const store = mockStore(initialState);
