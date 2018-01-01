@@ -11,7 +11,8 @@ export default class ProjectList extends React.Component<Props> {
     props: {
         projects: Project[],
         listProjects: Function,
-        loading: boolean
+        loading: boolean,
+        hasError: boolean
     };
 
     static defaultProps = {
@@ -26,6 +27,8 @@ export default class ProjectList extends React.Component<Props> {
         let contents;
         if (this.props.loading) {
             contents = <Spinner />;
+        } else if (this.props.hasError) {
+            contents = <Message status='critical' message='Error occurred when fetching projects' />;
         } else if (this.props.projects.length === 0) {
             contents = <Message status='disabled' message='No projects to show' />;
         } else {

@@ -8,10 +8,7 @@ import Spinner from "../../Spinner";
 
 describe('ProjectList component', () => {
     it('should render a list of provided projects', () => {
-        const projects = [
-            new Project('id1', 'Project 1'),
-            new Project('id2', 'Project 2')
-        ];
+        const projects = getProjectsList();
         const listProjectsFn = jest.fn();
         const wrapper = shallow(<ProjectList projects={projects} listProjects={listProjectsFn} />);
         expect(wrapper.find(ProjectListItem)).toHaveLength(2);
@@ -43,4 +40,23 @@ describe('ProjectList component', () => {
 
         expect(listProjectsFn).toHaveBeenCalled();
     });
+
+    it('should show a message when error occurs', () => {
+        expect.assertions(2);
+
+        const listProjectsFn = jest.fn();
+        const projects = [];
+        const wrapper = mount(<ProjectList projects={projects} listProjects={listProjectsFn} hasError={true} />);
+
+        const messageElement = wrapper.find(Message);
+        expect(messageElement).toHaveLength(1);
+        expect(messageElement.props().status).toEqual('critical');
+    });
+
+    function getProjectsList() {
+        return [
+            new Project('id1', 'Project 1'),
+            new Project('id2', 'Project 2')
+        ];
+    }
 });
