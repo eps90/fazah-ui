@@ -1,5 +1,5 @@
 import React from 'react';
-import ProjectList from "../../components/main/project-list/ProjectList";
+import ProjectList from "../../components/project/project-list/ProjectList";
 import {connect} from "react-redux";
 import {listProjects} from "../../store/project/actions";
 import PropTypes from 'prop-types';

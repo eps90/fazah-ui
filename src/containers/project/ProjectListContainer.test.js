@@ -1,7 +1,7 @@
 import React from 'react';
 import configureStore from 'redux-mock-store';
 import {Provider} from "react-redux";
-import ProjectList from "../../components/main/project-list/ProjectList";
+import ProjectList from "../../components/project/project-list/ProjectList";
 import ProjectListContainer from "./ProjectListContainer";
 import {mount} from "enzyme";
 

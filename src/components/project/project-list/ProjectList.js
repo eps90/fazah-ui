@@ -1,6 +1,6 @@
 import React from 'react';
 import ProjectListItem from "./ProjectListItem";
-import Message from "../message/Message";
+import Message from "../../main/message/Message";
 import List from "grommet/components/List";
 import ListItem from "grommet/components/ListItem";
 import Title from "grommet/components/Title";

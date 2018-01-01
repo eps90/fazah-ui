@@ -3,7 +3,7 @@ import {mount, shallow} from "enzyme";
 import ProjectList from "./ProjectList";
 import ProjectListItem from "./ProjectListItem";
 import Project from "../../../model/Project";
-import Message from "../message/Message";
+import Message from "../../main/message/Message";
 import Spinner from "../../Spinner";
 
 describe('ProjectList component', () => {
