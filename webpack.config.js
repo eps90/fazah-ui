@@ -1,35 +1,35 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const path = require("path");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
 module.exports = {
     entry: {
-        app: path.resolve(__dirname, 'src', 'index.js')
+        app: path.resolve(__dirname, "src", "index.js")
     },
     output: {
-        path: path.resolve('dist'),
-        filename: '[name].[chunkhash].js',
-        publicPath: '/',
-        chunkFilename: '[name].[chunkhash].js'
+        path: path.resolve("dist"),
+        filename: "[name].[chunkhash].js",
+        publicPath: "/",
+        chunkFilename: "[name].[chunkhash].js"
     },
     module:{
         loaders: [
             {
-                test: /\.js/, loader: 'babel-loader', exclude: /node_modules/
+                test: /\.js/, loader: "babel-loader", exclude: /node_modules/
             },
             {
                 test: /\.scss$/,
                 use: [
                     {
-                        loader: 'style-loader'
+                        loader: "style-loader"
                     },
                     {
-                        loader: 'css-loader'
+                        loader: "css-loader"
                     },
                     {
-                        loader: 'sass-loader',
+                        loader: "sass-loader",
                         options: {
-                            includePaths: ['./node_modules', './node_modules/grommet/node_modules']
+                            includePaths: ["./node_modules", "./node_modules/grommet/node_modules"]
                         }
                     }
                 ]
@@ -43,10 +43,10 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'src', 'index.html'),
+            template: path.resolve(__dirname, "src", "index.html"),
         }),
         new webpack.DefinePlugin({
-            'process.env': {
+            "process.env": {
                 NODE_ENV: JSON.stringify(process.env.NODE_ENV)
             }
         }),
