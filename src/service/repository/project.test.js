@@ -19,41 +19,43 @@ describe("Fetching projects", () => {
         });
     });
 
-    it("should return a list of all projects", () => {
-        expect.assertions(1);
-        fetchMock.get("end:/api/projects.json", getSampleServerResponse());
+    describe("all projects", () => {
+        it("should return a list of all projects", () => {
+            expect.assertions(1);
+            fetchMock.get("end:/api/projects.json", getSampleServerResponse());
 
-        return fetchProjects().then(actualResult => {
-            expect(actualResult).toEqual(getParsedProjects());
+            return fetchProjects().then(actualResult => {
+                expect(actualResult).toEqual(getParsedProjects());
+            });
         });
-    });
 
-    it("should return an empty array in case of no project", () => {
-        expect.assertions(1);
-        fetchMock.get("end:/api/projects.json", []);
+        it("should return an empty array in case of no project", () => {
+            expect.assertions(1);
+            fetchMock.get("end:/api/projects.json", []);
 
-        return fetchProjects().then(actualResult => {
-            const expectedResult = [];
-            expect(actualResult).toEqual(expectedResult);
+            return fetchProjects().then(actualResult => {
+                const expectedResult = [];
+                expect(actualResult).toEqual(expectedResult);
+            });
         });
-    });
 
-    it("should return an empty array in case when server response is wrongly formatted", () => {
-        expect.assertions(1);
-        fetchMock.get("end:/api/projects.json", {someKey: "someValue"});
+        it("should return an empty array in case when server response is wrongly formatted", () => {
+            expect.assertions(1);
+            fetchMock.get("end:/api/projects.json", {someKey: "someValue"});
 
-        return fetchProjects().then(actualResponse => {
-            const expectedResult = [];
-            expect(actualResponse).toEqual(expectedResult);
+            return fetchProjects().then(actualResponse => {
+                const expectedResult = [];
+                expect(actualResponse).toEqual(expectedResult);
+            });
         });
-    });
 
-    it("should throw an error when server returns an error status code", () => {
-        expect.assertions(1);
+        it("should throw an error when server returns an error status code", () => {
+            expect.assertions(1);
 
-        fetchMock.get("end:/api/projects.json", {status: 503, body: getSampleServerResponse()});
-        return fetchProjects().catch(err => {
-            expect(err).toBeDefined();
+            fetchMock.get("end:/api/projects.json", {status: 503, body: getSampleServerResponse()});
+            return fetchProjects().catch(err => {
+                expect(err).toBeDefined();
+            });
         });
     });
 });
