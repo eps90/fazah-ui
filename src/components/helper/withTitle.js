@@ -1,12 +1,12 @@
 import React from "react";
-import Title from "grommet/components/Title";
+import Heading from "grommet/components/Heading";
 
 export const withTitle = (titleContents) => {
     return (WrappedComponent) => {
         const hoc = (props) => {
             return (
                 <div>
-                    <Title>{titleContents}</Title>
+                    <Heading strong={true} margin='medium' tag='h2'>{titleContents}</Heading>
                     <WrappedComponent {...props} />
                 </div>
             );
