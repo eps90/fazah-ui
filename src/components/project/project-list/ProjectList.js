@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ProjectListItem from "./ProjectListItem";
 import Message from "../../layout/helper/Message";
 import List from "grommet/components/List";
@@ -7,15 +8,16 @@ import Project from "../../../model/Project";
 import Spinner from "../../layout/helper/Spinner";
 
 export default class ProjectList extends React.Component {
-    props: {
-        projects: Project[],
-        listProjects: Function,
-        loading: boolean,
-        hasError: boolean
+    static propTypes = {
+        listProjects: PropTypes.func.isRequired,
+        loading: PropTypes.bool,
+        hasError: PropTypes.bool,
+        projects: PropTypes.arrayOf(PropTypes.instanceOf(Project))
     };
 
     static defaultProps = {
-        loading: false
+        loading: false,
+        projects: []
     };
 
     componentWillMount() {

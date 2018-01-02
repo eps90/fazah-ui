@@ -20,7 +20,7 @@ ProjectListContainer.propTypes = {
 const mapStateToProps = (state) => {
     return {
         projects: state.projects.items,
-        loading: state.projects.loading,
+        loading: !!state.projects.loading,
         hasError: !!state.projects.error
     };
 };
