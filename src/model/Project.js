@@ -17,10 +17,10 @@ export default class Project {
 
     static fromJson(rawObj): Project {
         return new Project(
-            rawObj['id'],
-            rawObj['name'],
-            Metadata.fromJson(rawObj['metadata']),
-            rawObj['config']['available_languages']
+            rawObj["id"],
+            rawObj["name"],
+            Metadata.fromJson(rawObj["metadata"]),
+            rawObj["config"]["available_languages"]
         );
     }
 }

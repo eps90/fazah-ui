@@ -1,36 +1,36 @@
 // @flow
 
-import fetchMock from 'fetch-mock';
+import fetchMock from "fetch-mock";
 import Project from "../../model/Project";
 import Metadata from "../../model/Metadata";
 import {fetchProjects} from "./project";
 
-describe('Fetching projects', () => {
+describe("Fetching projects", () => {
     afterEach(() => {
         fetchMock.restore();
     });
 
-    it('should send a request to the server', () => {
+    it("should send a request to the server", () => {
         expect.assertions(1);
 
-        fetchMock.get('end:/api/projects.json', getSampleServerResponse());
+        fetchMock.get("end:/api/projects.json", getSampleServerResponse());
         return fetchProjects().then(() => {
-            expect(fetchMock.called('end:/api/projects.json')).toBe(true);
+            expect(fetchMock.called("end:/api/projects.json")).toBe(true);
         });
     });
 
-    it('should return a list of all projects', () => {
+    it("should return a list of all projects", () => {
         expect.assertions(1);
-        fetchMock.get('end:/api/projects.json', getSampleServerResponse());
+        fetchMock.get("end:/api/projects.json", getSampleServerResponse());
 
         return fetchProjects().then(actualResult => {
             expect(actualResult).toEqual(getParsedProjects());
         });
     });
 
-    it('should return an empty array in case of no project', () => {
+    it("should return an empty array in case of no project", () => {
         expect.assertions(1);
-        fetchMock.get('end:/api/projects.json', []);
+        fetchMock.get("end:/api/projects.json", []);
 
         return fetchProjects().then(actualResult => {
             const expectedResult = [];
@@ -38,9 +38,9 @@ describe('Fetching projects', () => {
         });
     });
 
-    it('should return an empty array in case when server response is wrongly formatted', () => {
+    it("should return an empty array in case when server response is wrongly formatted", () => {
         expect.assertions(1);
-        fetchMock.get('end:/api/projects.json', {someKey: 'someValue'});
+        fetchMock.get("end:/api/projects.json", {someKey: "someValue"});
 
         return fetchProjects().then(actualResponse => {
             const expectedResult = [];
@@ -48,10 +48,10 @@ describe('Fetching projects', () => {
         });
     });
 
-    it('should throw an error when server returns an error status code', () => {
+    it("should throw an error when server returns an error status code", () => {
         expect.assertions(1);
 
-        fetchMock.get('end:/api/projects.json', {status: 503, body: getSampleServerResponse()});
+        fetchMock.get("end:/api/projects.json", {status: 503, body: getSampleServerResponse()});
         return fetchProjects().catch(err => {
             expect(err).toBeDefined();
         });
@@ -69,7 +69,7 @@ function getSampleServerResponse() {
                 "enabled": true
             },
             "config": {
-                "available_languages": ['fr', 'en']
+                "available_languages": ["fr", "en"]
             }
         },
         {
@@ -81,7 +81,7 @@ function getSampleServerResponse() {
                 "enabled": false
             },
             "config": {
-                "available_languages": ['fr']
+                "available_languages": ["fr"]
             }
         }
     ];
@@ -97,7 +97,7 @@ function getParsedProjects() {
                 null,
                 true
             ),
-            ['fr', 'en']
+            ["fr", "en"]
         ),
         new Project(
             "9ce44f22-e01f-4c46-bc67-e97f0e59a282",
@@ -107,7 +107,7 @@ function getParsedProjects() {
                 new Date("2017-07-16T17:14:32+00:00"),
                 false
             ),
-            ['fr']
+            ["fr"]
         )
     ];
 }

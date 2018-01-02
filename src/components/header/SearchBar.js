@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Search from "grommet/components/Search";
 
 export default class SearchBar extends React.Component {

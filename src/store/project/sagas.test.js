@@ -1,13 +1,13 @@
 import {expectSaga, testSaga} from "redux-saga-test-plan";
-import * as matchers from 'redux-saga-test-plan/matchers';
+import * as matchers from "redux-saga-test-plan/matchers";
 import {throwError} from "redux-saga-test-plan/providers";
 import {failProjectListing, listProjects, setProjects} from "./actions";
 import watchProjects, {fetchProjectList} from "./sagas";
 import {fetchProjects} from "../../service/repository/project";
 
-describe('projects sagas', () => {
-    describe('unit', () => {
-        it('should dispatch action with fetched projects', () => {
+describe("projects sagas", () => {
+    describe("unit", () => {
+        it("should dispatch action with fetched projects", () => {
             const projectsFetched = [{id: 1}, {id: 2}];
             testSaga(fetchProjectList)
                 .next()
@@ -18,7 +18,7 @@ describe('projects sagas', () => {
                 .isDone();
         });
 
-        it('should dispatch error action when fetching projects fails', () => {
+        it("should dispatch error action when fetching projects fails", () => {
             testSaga(fetchProjectList)
                 .next()
                 .call(fetchProjects)
@@ -29,11 +29,11 @@ describe('projects sagas', () => {
         });
     });
 
-    describe('integration', () => {
-        it('should dispatch fetched projects', () => {
+    describe("integration", () => {
+        it("should dispatch fetched projects", () => {
             const projectsFetched = [
-                {id: 1, name: 'My first project'},
-                {id: 2, name: 'My second project'}
+                {id: 1, name: "My first project"},
+                {id: 2, name: "My second project"}
             ];
 
             return expectSaga(watchProjects)
@@ -45,10 +45,10 @@ describe('projects sagas', () => {
                 .silentRun();
         });
 
-        it('should dispatch error when fetching projects fails', () => {
+        it("should dispatch error when fetching projects fails", () => {
             return expectSaga(watchProjects)
                 .provide([
-                    [matchers.call.fn(fetchProjects), throwError('Fetching projects failed!')]
+                    [matchers.call.fn(fetchProjects), throwError("Fetching projects failed!")]
                 ])
                 .put(failProjectListing())
                 .dispatch(listProjects())

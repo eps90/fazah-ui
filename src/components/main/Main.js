@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Header from "../header/Header";
 import Box from "grommet/components/Box";
 import ProjectListContainer from "../../containers/project/ProjectListContainer";
@@ -12,6 +12,6 @@ export default class Main extends React.Component {
                     <ProjectListContainer />
                 </Box>
             </Box>
-        )
+        );
     }
 }

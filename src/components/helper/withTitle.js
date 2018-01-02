@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Title from "grommet/components/Title";
 
 export const withTitle = (titleContents) => {
@@ -10,6 +10,6 @@ export const withTitle = (titleContents) => {
                     <WrappedComponent {...props} />
                 </div>
             );
-        }
+        };
     };
 };

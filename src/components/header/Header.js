@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import SearchBar from "./SearchBar";
 import ProfileButton from "./ProfileButton";
 import Box from "grommet/components/Box";
-import GrommetHeader from 'grommet/components/Header';
+import GrommetHeader from "grommet/components/Header";
 
 export default class Header extends React.Component {
     render() {
@@ -13,6 +13,6 @@ export default class Header extends React.Component {
                     <ProfileButton />
                 </GrommetHeader>
             </Box>
-        )
+        );
     }
 }

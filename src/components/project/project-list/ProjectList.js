@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import ProjectListItem from "./ProjectListItem";
 import Message from "../../main/message/Message";
 import List from "grommet/components/List";

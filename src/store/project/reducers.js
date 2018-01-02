@@ -8,29 +8,29 @@ export const initialState = {
 
 const projects = (state = initialState, action) => {
     switch (action.type) {
-        case PROJECTS_REQUESTED:
-            return {
-                ...state,
-                loading: true,
-                error: false,
-                items: []
-            };
-        case PROJECTS_REQUEST_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                error: false,
-                items: action.projects
-            };
-        case PROJECTS_REQUEST_FAILURE:
-            return {
-                ...state,
-                loading: false,
-                items: [],
-                error: true
-            };
-        default:
-            return state;
+    case PROJECTS_REQUESTED:
+        return {
+            ...state,
+            loading: true,
+            error: false,
+            items: []
+        };
+    case PROJECTS_REQUEST_SUCCESS:
+        return {
+            ...state,
+            loading: false,
+            error: false,
+            items: action.projects
+        };
+    case PROJECTS_REQUEST_FAILURE:
+        return {
+            ...state,
+            loading: false,
+            items: [],
+            error: true
+        };
+    default:
+        return state;
     }
 };
 

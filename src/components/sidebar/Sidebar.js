@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import Logo from "./Logo";
-import GrommetSidebar from 'grommet/components/Sidebar';
+import GrommetSidebar from "grommet/components/Sidebar";
 
 export default class Sidebar extends React.Component {
     render() {

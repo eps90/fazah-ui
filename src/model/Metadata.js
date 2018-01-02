@@ -13,9 +13,9 @@ export default class Metadata {
 
     static fromJson(rawObj): Metadata {
         return new Metadata(
-            new Date(rawObj['creation_time']),
-            rawObj['update_time'] ? new Date(rawObj['update_time']) : null,
-            rawObj['enabled']
+            new Date(rawObj["creation_time"]),
+            rawObj["update_time"] ? new Date(rawObj["update_time"]) : null,
+            rawObj["enabled"]
         );
     }
 }

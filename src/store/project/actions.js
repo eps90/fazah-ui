@@ -1,6 +1,6 @@
-export const PROJECTS_REQUESTED = 'PROJECTS_REQUESTED';
-export const PROJECTS_REQUEST_SUCCESS = 'PROJECTS_REQUEST_SUCCESS';
-export const PROJECTS_REQUEST_FAILURE = 'PROJECTS_REQUEST_FAILURE';
+export const PROJECTS_REQUESTED = "PROJECTS_REQUESTED";
+export const PROJECTS_REQUEST_SUCCESS = "PROJECTS_REQUEST_SUCCESS";
+export const PROJECTS_REQUEST_FAILURE = "PROJECTS_REQUEST_FAILURE";
 
 export function listProjects() {
     return {
@@ -18,5 +18,5 @@ export function setProjects(projects) {
 export function failProjectListing() {
     return {
         type: PROJECTS_REQUEST_FAILURE
-    }
+    };
 }

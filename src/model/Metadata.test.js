@@ -2,8 +2,8 @@
 
 import Metadata from "./Metadata";
 
-describe('Metadata', () => {
-    it('should parse raw metadata into object', () => {
+describe("Metadata", () => {
+    it("should parse raw metadata into object", () => {
         const inputObject = {
             creation_time: "2017-11-25T12:17:01+00:00",
             update_time: "2017-07-16T17:14:32+00:00",
@@ -19,7 +19,7 @@ describe('Metadata', () => {
         expect(expectedResult).toEqual(actualResult);
     });
 
-    it('should set update time to null if it is not provided', () => {
+    it("should set update time to null if it is not provided", () => {
         const inputObject = {
             creation_time: "2017-11-25T12:17:01+00:00",
             update_time: null,

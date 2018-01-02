@@ -1,13 +1,13 @@
-import projectsReducer, {initialState} from './reducers';
+import projectsReducer, {initialState} from "./reducers";
 import {failProjectListing, listProjects, setProjects} from "./actions";
 
-describe('project reducer', () => {
-    it('should return initial state', () => {
+describe("project reducer", () => {
+    it("should return initial state", () => {
         const state = projectsReducer(undefined, {});
         expect(state).toEqual(initialState);
     });
 
-    it('should be set state to loading when fetching projects', () => {
+    it("should be set state to loading when fetching projects", () => {
         const action = listProjects();
         const expectedState = {
             ...initialState,
@@ -19,10 +19,10 @@ describe('project reducer', () => {
         expect(actualState).toEqual(expectedState);
     });
 
-    it('should set fetched projects', () => {
+    it("should set fetched projects", () => {
         const projects = [
-            {id: 1, name: 'My first project'},
-            {id: 2, name: 'My second project'}
+            {id: 1, name: "My first project"},
+            {id: 2, name: "My second project"}
         ];
         const action = setProjects(projects);
 
@@ -36,7 +36,7 @@ describe('project reducer', () => {
         expect(actualState).toEqual(expectedState);
     });
 
-    it('should set error state when project fetching fails', () => {
+    it("should set error state when project fetching fails", () => {
         const action = failProjectListing();
         const expectedState = {
             ...initialState,

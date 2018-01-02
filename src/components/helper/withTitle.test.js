@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import {withTitle} from "./withTitle";
 import {shallow} from "enzyme";
-import Title from 'grommet/components/Title';
+import Title from "grommet/components/Title";
 
-describe('withTitle helper', () => {
-    it('should render a title before wrapped component', () => {
-        const titleContents = 'This is a title';
+describe("withTitle helper", () => {
+    it("should render a title before wrapped component", () => {
+        const titleContents = "This is a title";
         const WrappedComponent = withTitle(titleContents)(TestComponent);
         const wrapper = shallow(<WrappedComponent />);
 
