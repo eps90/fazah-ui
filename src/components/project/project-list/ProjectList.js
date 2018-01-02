@@ -1,10 +1,10 @@
 import React from "react";
 import ProjectListItem from "./ProjectListItem";
-import Message from "../../main/message/Message";
+import Message from "../../layout/helper/Message";
 import List from "grommet/components/List";
 import ListItem from "grommet/components/ListItem";
 import Project from "../../../model/Project";
-import Spinner from "../../Spinner";
+import Spinner from "../../layout/helper/Spinner";
 
 export default class ProjectList extends React.Component {
     props: {

@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../header/Header";
 import Box from "grommet/components/Box";
-import ProjectListContainer from "../../containers/project/ProjectListContainer";
+import ProjectListContainer from "../../../containers/project/ProjectListContainer";
 import {Redirect, Route, Switch} from "react-router-dom";
 
 export default class Main extends React.Component {
