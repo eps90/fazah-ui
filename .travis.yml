@@ -9,5 +9,7 @@ node_js:
   - "4"
 cache: yarn
 
+script: yarn test --coverage
+
 after_script:
   - ./node_modules/.bin/codacy-coverage
