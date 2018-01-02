@@ -54,5 +54,8 @@ module.exports = {
             }
         }),
         new DotEnvPlugin()
-    ]
+    ],
+    devServer: {
+        historyApiFallback: true
+    }
 };
