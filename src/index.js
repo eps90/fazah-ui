@@ -8,6 +8,7 @@ import {Provider} from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import reducers from "./store/reducers";
 import sagas from "./store/sagas";
+import {BrowserRouter as Router} from "react-router-dom";
 
 import "grommet/scss/vanilla/index.scss";
 
@@ -18,7 +19,9 @@ sagaMiddleware.run(sagas);
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <Router>
+            <App />
+        </Router>
     </Provider>,
     document.getElementById("root")
 );
