@@ -58,6 +58,44 @@ describe("Fetching projects", () => {
             });
         });
     });
+
+    describe("with params", () => {
+        it("should be able to ask only for disabled projects", () => {
+            const requestParams = {enabled: false};
+            const expectedEndpoint = "end:/api/projects.json?enabled=false";
+
+            fetchMock.get(expectedEndpoint, getSampleServerResponse());
+
+            return fetchProjects(requestParams).then(() => {
+                expect(fetchMock.called(expectedEndpoint)).toBe(true);
+            });
+        });
+
+        it("should be able to ask with phrase", () => {
+            const requestParams = {phrase: "my-p"};
+            const expectedEndpoint = "end:/api/projects.json?phrase=my-p";
+
+            fetchMock.get(expectedEndpoint, getSampleServerResponse());
+
+            return fetchProjects(requestParams).then(() => {
+                expect(fetchMock.called(expectedEndpoint)).toBe(true);
+            });
+        });
+
+        it("should ask with multiple params", () => {
+            const requestParams = {
+                enabled: true,
+                phrase: "this-is-a-phrase"
+            };
+            const expectedEndpoint = "end:/api/projects.json?enabled=true&phrase=this-is-a-phrase";
+
+            fetchMock.get(expectedEndpoint, getSampleServerResponse());
+
+            return fetchProjects(requestParams).then(() => {
+                expect(fetchMock.called(expectedEndpoint)).toBe(true);
+            });
+        });
+    });
 });
 
 function getSampleServerResponse() {
