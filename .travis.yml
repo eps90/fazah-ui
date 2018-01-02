@@ -8,3 +8,6 @@ node_js:
   - "5"
   - "4"
 cache: yarn
+
+after_script:
+  - ./node_modules/.bin/codacy-coverage
