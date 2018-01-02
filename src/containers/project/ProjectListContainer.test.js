@@ -4,15 +4,13 @@ import {Provider} from "react-redux";
 import ProjectList from "../../components/project/project-list/ProjectList";
 import ProjectListContainer from "./ProjectListContainer";
 import {mount} from "enzyme";
+import Project from "../../model/Project";
 
 describe("ProjectListContainer", () => {
     const mockStore = configureStore();
 
     it("should render a ProjectList component with projects", () => {
-        const projects = [
-            {id: 1, name: "My first project"},
-            {id: 2, name: "My second project"},
-        ];
+        const projects = getSampleProjects();
         const component = createComponentWithState(projects);
 
         const wrapper = mount(component);
@@ -61,5 +59,12 @@ describe("ProjectListContainer", () => {
                 <ProjectListContainer/>
             </Provider>
         );
+    }
+
+    function getSampleProjects() {
+        return [
+            new Project(1, "My first project"),
+            new Project(2, "My second project"),
+        ];
     }
 });

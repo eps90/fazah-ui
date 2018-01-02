@@ -4,7 +4,7 @@ import Project from "../../../model/Project";
 
 export default class ProjectListItem extends React.Component {
     static propTypes = {
-        project: PropTypes.instanceOf(Project)
+        project: PropTypes.instanceOf(Project).isRequired
     };
 
     render() {
