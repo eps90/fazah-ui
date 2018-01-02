@@ -3,7 +3,6 @@ import ProjectListItem from "./ProjectListItem";
 import Message from "../../main/message/Message";
 import List from "grommet/components/List";
 import ListItem from "grommet/components/ListItem";
-import Title from "grommet/components/Title";
 import Project from "../../../model/Project";
 import Spinner from "../../Spinner";
 
@@ -39,11 +38,6 @@ export default class ProjectList extends React.Component<Props> {
             </List>;
         }
 
-        return (
-            <div>
-                <Title>Projects list</Title>
-                {contents}
-            </div>
-        );
+        return contents;
     }
 }
