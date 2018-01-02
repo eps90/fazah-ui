@@ -6,6 +6,8 @@ import Metadata from "../../model/Metadata";
 import {fetchProjects} from "./project";
 
 describe("Fetching projects", () => {
+    const defaultProjectsUrl = "end:/api/projects.json?enabled=true";
+
     afterEach(() => {
         fetchMock.restore();
     });
@@ -13,16 +15,16 @@ describe("Fetching projects", () => {
     it("should send a request to the server", () => {
         expect.assertions(1);
 
-        fetchMock.get("end:/api/projects.json", getSampleServerResponse());
+        fetchMock.get(defaultProjectsUrl, getSampleServerResponse());
         return fetchProjects().then(() => {
-            expect(fetchMock.called("end:/api/projects.json")).toBe(true);
+            expect(fetchMock.called(defaultProjectsUrl)).toBe(true);
         });
     });
 
     describe("all projects", () => {
         it("should return a list of all projects", () => {
             expect.assertions(1);
-            fetchMock.get("end:/api/projects.json", getSampleServerResponse());
+            fetchMock.get(defaultProjectsUrl, getSampleServerResponse());
 
             return fetchProjects().then(actualResult => {
                 expect(actualResult).toEqual(getParsedProjects());
@@ -31,7 +33,7 @@ describe("Fetching projects", () => {
 
         it("should return an empty array in case of no project", () => {
             expect.assertions(1);
-            fetchMock.get("end:/api/projects.json", []);
+            fetchMock.get(defaultProjectsUrl, []);
 
             return fetchProjects().then(actualResult => {
                 const expectedResult = [];
@@ -41,7 +43,7 @@ describe("Fetching projects", () => {
 
         it("should return an empty array in case when server response is wrongly formatted", () => {
             expect.assertions(1);
-            fetchMock.get("end:/api/projects.json", {someKey: "someValue"});
+            fetchMock.get(defaultProjectsUrl, {someKey: "someValue"});
 
             return fetchProjects().then(actualResponse => {
                 const expectedResult = [];
@@ -52,7 +54,7 @@ describe("Fetching projects", () => {
         it("should throw an error when server returns an error status code", () => {
             expect.assertions(1);
 
-            fetchMock.get("end:/api/projects.json", {status: 503, body: getSampleServerResponse()});
+            fetchMock.get(defaultProjectsUrl, {status: 503, body: getSampleServerResponse()});
             return fetchProjects().catch(err => {
                 expect(err).toBeDefined();
             });
@@ -73,7 +75,7 @@ describe("Fetching projects", () => {
 
         it("should be able to ask with phrase", () => {
             const requestParams = {phrase: "my-p"};
-            const expectedEndpoint = "end:/api/projects.json?phrase=my-p";
+            const expectedEndpoint = "end:/api/projects.json?enabled=true&phrase=my-p";
 
             fetchMock.get(expectedEndpoint, getSampleServerResponse());
 
