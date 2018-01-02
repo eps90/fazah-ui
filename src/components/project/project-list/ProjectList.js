@@ -6,7 +6,7 @@ import ListItem from "grommet/components/ListItem";
 import Project from "../../../model/Project";
 import Spinner from "../../Spinner";
 
-export default class ProjectList extends React.Component<Props> {
+export default class ProjectList extends React.Component {
     props: {
         projects: Project[],
         listProjects: Function,
