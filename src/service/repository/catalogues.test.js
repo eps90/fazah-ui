@@ -75,6 +75,68 @@ describe("Fetching project's catalogues", () => {
             });
         });
     });
+
+    describe("with params", () => {
+        it("should be able to ask for disabled catalogues", () => {
+            const projectId = 2;
+            const params = {
+                enabled: false
+            };
+
+            const expectedEndpoint = `end:/api/catalogues.json?project_id=${projectId}&enabled=false`;
+            fetchMock.get(expectedEndpoint, getSampleResponse());
+
+            return fetchCataloguesForProject(projectId, params).then(() => {
+                expect(fetchMock.called(expectedEndpoint)).toBe(true);
+            });
+        });
+
+        it("should be able to ask for catalogues with a phrase", () => {
+            const projectId = 2;
+            const params = {
+                phrase: "some-phrase"
+            };
+
+            const expectedEndpoint = `end:/api/catalogues.json?project_id=${projectId}&enabled=true&phrase=some-phrase`;
+            fetchMock.get(expectedEndpoint, getSampleResponse());
+
+            return fetchCataloguesForProject(projectId, params).then(() => {
+                expect(fetchMock.called(expectedEndpoint)).toBe(true);
+            });
+        });
+
+        it("should be ale to ask for catalogues under specific catalogueId", () => {
+            const projectId = 2;
+            const params = {
+                parent_catalogue_id: 543
+            };
+
+            const expectedEndpoint = `end:/api/catalogues.json?project_id=${projectId}&enabled=true` +
+                "&parent_catalogue_id=543";
+            fetchMock.get(expectedEndpoint, getSampleResponse());
+
+            return fetchCataloguesForProject(projectId, params).then(() => {
+                expect(fetchMock.called(expectedEndpoint)).toBe(true);
+            });
+        });
+
+        it("should be able to ask with multiple params", () => {
+            const projectId = 2;
+            const params = {
+                parent_catalogue_id: 543,
+                phrase: "eee",
+                enabled: false
+            };
+
+            const expectedEndpoint = `end:/api/catalogues.json?project_id=${projectId}&parent_catalogue_id=543` +
+                "&phrase=eee&enabled=false";
+            fetchMock.get(expectedEndpoint, getSampleResponse());
+
+            return fetchCataloguesForProject(projectId, params).then(() => {
+                expect(fetchMock.called(expectedEndpoint)).toBe(true);
+            });
+        });
+    });
 });
 
 function getSampleResponse() {
