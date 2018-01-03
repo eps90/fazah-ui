@@ -3,10 +3,15 @@
 import Project from "../../model/Project";
 import {API_URL} from "./../../constants";
 import "whatwg-fetch";
+import {prepareQueryParams} from "./helpers";
+
+const defaultQueryParams = {
+    enabled: true
+};
 
 export function fetchProjects(params = {}): Promise<Project[]> {
     let url = new URL(`${API_URL}/api/projects.json`);
-    const queryParams = prepareQueryParams(params);
+    const queryParams = prepareQueryParams(params, defaultQueryParams);
     if (queryParams.length) {
         url += `?${queryParams}`;
     }
@@ -27,30 +32,4 @@ export function fetchProjects(params = {}): Promise<Project[]> {
                 return Project.fromJson(rawProject);
             });
         });
-}
-
-function prepareQueryParams(params) {
-    const defaults = {
-        enabled: true
-    };
-    let result = [];
-    for (const defaultParam in defaults) {
-        if (!defaults.hasOwnProperty(defaultParam) || params.hasOwnProperty(defaultParam)) {
-            continue;
-        }
-
-        result.push(`${encodeURIComponent(defaultParam)}=${encodeURIComponent(defaults[defaultParam])}`);
-    }
-
-    for (const param in params) {
-        if (!params.hasOwnProperty(param)) {
-            continue;
-        }
-
-        if (params[param] !== null) {
-            result.push(`${encodeURIComponent(param)}=${encodeURIComponent(params[param])}`);
-        }
-    }
-
-    return result.join("&");
 }
