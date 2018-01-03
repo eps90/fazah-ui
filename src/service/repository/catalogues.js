@@ -3,9 +3,18 @@
 import "whatwg-fetch";
 import {API_URL} from "../../constants";
 import Catalogue from "../../model/Catalogue";
+import {prepareQueryParams} from "./helpers";
 
-export function fetchCataloguesForProject(projectId): Promise<Catalogue> {
-    const url = `${API_URL}/api/catalogues.json?project_id=${projectId}`;
+const defaults = {
+    enabled: true
+};
+
+export function fetchCataloguesForProject(projectId, params = {}): Promise<Catalogue> {
+    let url = `${API_URL}/api/catalogues.json?project_id=${projectId}`;
+    const queryParams = prepareQueryParams(params, defaults);
+    if (queryParams.length) {
+        url += `&${queryParams}`;
+    }
 
     return fetch(url)
         .then(response => {

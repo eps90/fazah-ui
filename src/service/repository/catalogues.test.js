@@ -12,7 +12,7 @@ describe("Fetching project's catalogues", () => {
         expect.assertions(1);
 
         const projectId = 1;
-        const expectedEndpoint = `end:/api/catalogues.json?project_id=${projectId}`;
+        const expectedEndpoint = `end:/api/catalogues.json?project_id=${projectId}&enabled=true`;
 
         fetchMock.get(expectedEndpoint, getSampleResponse());
 
@@ -26,7 +26,7 @@ describe("Fetching project's catalogues", () => {
             expect.assertions(1);
 
             const projectId = 1;
-            const expectedEndpoint = `end:/api/catalogues.json?project_id=${projectId}`;
+            const expectedEndpoint = `end:/api/catalogues.json?project_id=${projectId}&enabled=true`;
 
             fetchMock.get(expectedEndpoint, getSampleResponse());
 
@@ -40,7 +40,7 @@ describe("Fetching project's catalogues", () => {
             expect.assertions(1);
 
             const projectId = 1;
-            const expectedEndpoint = `end:/api/catalogues.json?project_id=${projectId}`;
+            const expectedEndpoint = `end:/api/catalogues.json?project_id=${projectId}&enabled=true`;
 
             fetchMock.get(expectedEndpoint, {some: "objectToReturn"});
 
@@ -53,7 +53,7 @@ describe("Fetching project's catalogues", () => {
             expect.assertions(1);
 
             const projectId = 1;
-            const expectedEndpoint = `end:/api/catalogues.json?project_id=${projectId}`;
+            const expectedEndpoint = `end:/api/catalogues.json?project_id=${projectId}&enabled=true`;
 
             fetchMock.get(expectedEndpoint, []);
 
@@ -66,7 +66,7 @@ describe("Fetching project's catalogues", () => {
             expect.assertions(1);
 
             const projectId = 1;
-            const expectedEndpoint = `end:/api/catalogues.json?project_id=${projectId}`;
+            const expectedEndpoint = `end:/api/catalogues.json?project_id=${projectId}&enabled=true`;
 
             fetchMock.get(expectedEndpoint, {body: [], status: 503});
 
