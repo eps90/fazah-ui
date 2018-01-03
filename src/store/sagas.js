@@ -1,8 +1,10 @@
 import {all, fork} from "redux-saga/effects";
 import projectSagas from "./project/sagas";
+import catalogueSagas from "./catalogue/sagas";
 
 export default function* runSagas() {
     yield all([
-        fork(projectSagas)
+        fork(projectSagas),
+        fork(catalogueSagas)
     ]);
 }
