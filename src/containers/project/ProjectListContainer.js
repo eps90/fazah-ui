@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 import {withTitle} from "../../components/helper/withTitle";
 import {compose} from "redux";
 
-const ProjectListContainer = ({projects, listProjects, loading, hasError}) => (
-    <ProjectList projects={projects} listProjects={listProjects} loading={loading} hasError={hasError} />
+const ProjectListContainer = ({projects, listProjects, loading, hasError, ...props}) => (
+    <ProjectList projects={projects} listProjects={listProjects} loading={loading} hasError={hasError} {...props} />
 );
 
 ProjectListContainer.propTypes = {
