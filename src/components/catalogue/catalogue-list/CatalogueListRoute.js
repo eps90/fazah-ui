@@ -1,5 +1,4 @@
 import React from "react";
-import {withRouter} from "react-router-dom";
 import CatalogueListContainer from "../../../containers/catalogue/CatalogueListContainer";
 import PropTypes from "prop-types";
 
