@@ -1,10 +1,9 @@
 import React from "react";
 import {mount, shallow} from "enzyme";
-import Message from "../../layout/helper/Message";
-import Spinner from "../../layout/helper/Spinner";
 import Catalogue from "../../../model/Catalogue";
 import CatalogueList from "./CatalogueList";
 import CatalogueListItem from "./CatalogueListItem";
+import {Dimmer, Message} from "semantic-ui-react";
 
 describe("CatalogueList component", () => {
     it("should render a list of provided catalogues", () => {
@@ -28,7 +27,7 @@ describe("CatalogueList component", () => {
 
         const wrapper = shallow(<CatalogueList catalogues={catalogues} listCatalogues={listCataloguesFn} loading={isLoading} />);
 
-        expect(wrapper.find(Spinner)).toHaveLength(1);
+        expect(wrapper.find(Dimmer).first().props().active).toBe(true);
     });
 
     it("should call list catalogues for project id function on mount", () => {
@@ -51,7 +50,7 @@ describe("CatalogueList component", () => {
 
         const messageElement = wrapper.find(Message);
         expect(messageElement).toHaveLength(1);
-        expect(messageElement.props().status).toEqual("critical");
+        expect(messageElement.props().negative).toBe(true);
     });
 
     function getCataloguesList() {

@@ -3,8 +3,7 @@ import {mount, shallow} from "enzyme";
 import ProjectList from "./ProjectList";
 import ProjectListItem from "./ProjectListItem";
 import Project from "../../../model/Project";
-import Message from "../../layout/helper/Message";
-import Spinner from "../../layout/helper/Spinner";
+import {Dimmer, Message} from "semantic-ui-react";
 
 describe("ProjectList component", () => {
     it("should render a list of provided projects", () => {
@@ -28,7 +27,7 @@ describe("ProjectList component", () => {
 
         const wrapper = shallow(<ProjectList projects={projects} listProjects={listProjectsFn} loading={isLoading} />);
 
-        expect(wrapper.find(Spinner)).toHaveLength(1);
+        expect(wrapper.find(Dimmer).first().props().active).toBe(true);
     });
 
     it("should call list projects function on mount", () => {
@@ -50,7 +49,7 @@ describe("ProjectList component", () => {
 
         const messageElement = wrapper.find(Message);
         expect(messageElement).toHaveLength(1);
-        expect(messageElement.props().status).toEqual("critical");
+        expect(messageElement.props().negative).toBe(true);
     });
 
     function getProjectsList() {
