@@ -1,7 +1,7 @@
 import React from "react";
 import {withTitle} from "./withTitle";
 import {shallow} from "enzyme";
-import Heading from "grommet/components/Heading";
+import {Header} from "semantic-ui-react";
 
 describe("withTitle helper", () => {
     it("should render a title before wrapped component", () => {
@@ -10,7 +10,7 @@ describe("withTitle helper", () => {
         const wrapper = shallow(<WrappedComponent />);
 
         expect(wrapper.find(TestComponent)).toHaveLength(1);
-        expect(wrapper.find(Heading)).toHaveLength(1);
+        expect(wrapper.find(Header)).toHaveLength(1);
     });
 });
 

@@ -1,12 +1,12 @@
 import React from "react";
-import Heading from "grommet/components/Heading";
+import {Header} from "semantic-ui-react";
 
 export const withTitle = (titleContents) => {
     return (WrappedComponent) => {
         const hoc = (props) => {
             return (
                 <div>
-                    <Heading strong={true} margin='medium' tag='h2'>{titleContents}</Heading>
+                    <Header as='h2'>{titleContents}</Header>
                     <WrappedComponent {...props} />
                 </div>
             );
