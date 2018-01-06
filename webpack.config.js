@@ -40,10 +40,7 @@ module.exports = {
                         loader: "css-loader"
                     },
                     {
-                        loader: "sass-loader",
-                        options: {
-                            includePaths: ["./node_modules", "./node_modules/grommet/node_modules"]
-                        }
+                        loader: "sass-loader"
                     }
                 ]
             },

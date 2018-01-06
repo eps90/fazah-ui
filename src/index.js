@@ -10,7 +10,6 @@ import reducers from "./store/reducers";
 import sagas from "./store/sagas";
 import {BrowserRouter as Router} from "react-router-dom";
 
-// import "grommet/scss/vanilla/index.scss";
 import "semantic-ui-css/semantic.css";
 
 const sagaMiddleware = createSagaMiddleware();
