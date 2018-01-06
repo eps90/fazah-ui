@@ -5,6 +5,7 @@ import ProjectList from "../../components/project/project-list/ProjectList";
 import ProjectListContainer from "./ProjectListContainer";
 import {mount} from "enzyme";
 import Project from "../../model/Project";
+import {MemoryRouter} from "react-router-dom";
 
 describe("ProjectListContainer", () => {
     const mockStore = configureStore();
@@ -56,7 +57,9 @@ describe("ProjectListContainer", () => {
 
         return (
             <Provider store={store}>
-                <ProjectListContainer/>
+                <MemoryRouter>
+                    <ProjectListContainer/>
+                </MemoryRouter>
             </Provider>
         );
     }
