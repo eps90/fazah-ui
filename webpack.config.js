@@ -20,6 +20,17 @@ module.exports = {
                 test: /\.js/, loader: "babel-loader", exclude: /node_modules/
             },
             {
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: "style-loader",
+                    },
+                    {
+                        loader: "css-loader"
+                    }
+                ]
+            },
+            {
                 test: /\.scss$/,
                 use: [
                     {
@@ -40,6 +51,18 @@ module.exports = {
                 test: /\.svg$/,
                 use: "svg-react-loader",
                 exclude: /node_modules/
+            },
+            {
+                test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+                use: [
+                    {
+                        loader: "url-loader",
+                        options: {
+                            limit: 10000
+                        }
+                    }
+                ],
+                include: /node_modules/
             }
         ]
     },
