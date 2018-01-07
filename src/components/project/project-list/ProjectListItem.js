@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Project from "../../../model/Project";
-import {List} from "semantic-ui-react";
+import {Flag, List} from "semantic-ui-react";
+import moment from "moment";
 
 export default class ProjectListItem extends React.Component {
     static propTypes = {
@@ -20,9 +21,23 @@ export default class ProjectListItem extends React.Component {
     }
 
     render() {
+        const updatedAtFormatted = moment(this.props.project.metadata.updatedAt).fromNow();
+        const desc = `Last modified: ${updatedAtFormatted}`;
+        const flags = this.props.project.availableLanguages.map(lang => (
+            <Flag key={lang} name={lang} />
+        ));
+
         return (
             <List.Item onClick={this.openProject.bind(this)}>
-                <List.Header as="a">{this.props.project.name}</List.Header>
+                <List.Content floated="right">
+                    {flags}
+                </List.Content>
+                <List.Content>
+                    <List.Header as="a">{this.props.project.name}</List.Header>
+                    <List.Description>
+                        <span>{desc}</span>
+                    </List.Description>
+                </List.Content>
             </List.Item>
         );
     }

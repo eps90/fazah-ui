@@ -3,6 +3,8 @@ import ProjectListItem from "./ProjectListItem";
 import Project from "../../../model/Project";
 import {mount, shallow} from "enzyme";
 import {MemoryRouter, Route} from "react-router-dom";
+import Metadata from "../../../model/Metadata";
+import {Flag} from "semantic-ui-react";
 
 describe("ProjectListItem component", () => {
     it("should display a project name", () => {
@@ -12,6 +14,27 @@ describe("ProjectListItem component", () => {
         const wrapper = shallow(component);
 
         expect(wrapper.html()).toContain(projectName);
+    });
+
+    it("it should show last modified date", () => {
+        const updatedAt = new Date("2012-01-01");
+        const metadata = new Metadata(null, updatedAt, true);
+        const project = new Project("312312", "My project", metadata);
+        const component = createComponentUnderTest({project});
+        const wrapper = shallow(component);
+
+        expect(wrapper.html()).toContain("Last modified: ");
+    });
+
+    it("should contain flags of available languages", () => {
+        const availableLanguages = ["fr", "pl"];
+        const project = new Project("321312", "My project", Metadata.empty(), availableLanguages);
+        const component = createComponentUnderTest({project});
+        const wrapper = mount(component);
+
+        expect(wrapper.find(Flag)).toHaveLength(2);
+        expect(wrapper.find(Flag).at(0).props().name).toEqual("fr");
+        expect(wrapper.find(Flag).at(1).props().name).toEqual("pl");
     });
 
     it("should redirect to catalogues route on click", () => {
