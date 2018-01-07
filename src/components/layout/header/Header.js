@@ -1,6 +1,6 @@
 import React from "react";
 import {Menu} from "semantic-ui-react";
-import Logo from "../sidebar/Logo";
+import Logo from "./Logo";
 
 export default class Header extends React.Component {
     render() {
