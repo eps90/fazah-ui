@@ -8,24 +8,23 @@ import {Dimmer, Message} from "semantic-ui-react";
 describe("ProjectList component", () => {
     it("should render a list of provided projects", () => {
         const projects = getProjectsList();
-        const listProjectsFn = jest.fn();
-        const wrapper = shallow(<ProjectList projects={projects} listProjects={listProjectsFn} />);
+        const component = createComponentUnderTest({projects});
+        const wrapper = shallow(component);
         expect(wrapper.find(ProjectListItem)).toHaveLength(2);
     });
 
     it("should show a message when no projects are found", () => {
         const projects = [];
-        const listProjectsFn = jest.fn();
-        const wrapper = shallow(<ProjectList projects={projects} listProjects={listProjectsFn} />);
+        const component = createComponentUnderTest({projects});
+        const wrapper = shallow(component);
         expect(wrapper.find(Message)).toHaveLength(1);
     });
 
     it("should show a spinner when projects are loading", () => {
-        const projects = [];
-        const listProjectsFn = jest.fn();
         const isLoading = true;
+        const component = createComponentUnderTest({loading: isLoading});
 
-        const wrapper = shallow(<ProjectList projects={projects} listProjects={listProjectsFn} loading={isLoading} />);
+        const wrapper = shallow(component);
 
         expect(wrapper.find(Dimmer).first().props().active).toBe(true);
     });
@@ -35,7 +34,8 @@ describe("ProjectList component", () => {
 
         const listProjectsFn = jest.fn();
         const projects = [];
-        mount(<ProjectList projects={projects} listProjects={listProjectsFn} />);
+        const component = createComponentUnderTest({projects, listProjects: listProjectsFn});
+        mount(component);
 
         expect(listProjectsFn).toHaveBeenCalled();
     });
@@ -43,9 +43,8 @@ describe("ProjectList component", () => {
     it("should show a message when error occurs", () => {
         expect.assertions(2);
 
-        const listProjectsFn = jest.fn();
-        const projects = [];
-        const wrapper = mount(<ProjectList projects={projects} listProjects={listProjectsFn} hasError={true} />);
+        const component = createComponentUnderTest({hasError: true});
+        const wrapper = mount(component);
 
         const messageElement = wrapper.find(Message);
         expect(messageElement).toHaveLength(1);
@@ -57,5 +56,17 @@ describe("ProjectList component", () => {
             new Project("id1", "Project 1"),
             new Project("id2", "Project 2")
         ];
+    }
+
+    function createComponentUnderTest(targetValues) {
+        const {
+            listProjects = jest.fn(),
+            selectProject = jest.fn(),
+            projects = [],
+            hasError = false,
+            loading = false
+        } = targetValues;
+        return <ProjectList listProjects={listProjects} selectProject={selectProject}
+            projects={projects} hasError={hasError} loading={loading}/>;
     }
 });
