@@ -10,6 +10,10 @@ import {MemoryRouter} from "react-router-dom";
 describe("ProjectListContainer", () => {
     const mockStore = configureStore();
 
+    beforeEach(() => {
+        jest.resetModules();
+    });
+
     it("should render a ProjectList component with projects", () => {
         const projects = getSampleProjects();
         const component = createComponentWithState(projects);
@@ -19,14 +23,21 @@ describe("ProjectListContainer", () => {
     });
 
     it("should pass request action to ProjectList component", () => {
-        jest.doMock("../../store/project/actions", {
-            listProjects: jest.fn()
-        });
+        mockExternalActions();
 
         const component = createComponentWithState();
         const wrapper = mount(component);
 
         expect(wrapper.find(ProjectList).first().props().listProjects).toBeDefined();
+    });
+
+    it("should pass selecting project action to ProjectList component", () => {
+        mockExternalActions();
+
+        const component = createComponentWithState();
+        const wrapper = mount(component);
+
+        expect(wrapper.find(ProjectList).first().props().selectProject).toBeDefined();
     });
 
     it("it should pass loading state to ProjectList component", () => {
@@ -69,5 +80,12 @@ describe("ProjectListContainer", () => {
             new Project(1, "My first project"),
             new Project(2, "My second project"),
         ];
+    }
+
+    function mockExternalActions({listProjects = jest.fn(), selectProject = jest.fn()} = {}) {
+        jest.doMock("../../store/project/actions", {
+            listProjects,
+            selectProject
+        });
     }
 });
