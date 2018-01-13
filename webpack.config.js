@@ -6,7 +6,19 @@ const DotEnvPlugin = require("dotenv-webpack");
 
 module.exports = {
     entry: {
-        app: path.resolve(__dirname, "src", "index.js")
+        app: path.resolve(__dirname, "src", "index.js"),
+        vendor: [
+            "react",
+            "react-router",
+            "redux",
+            "react-redux",
+            "redux-saga",
+            "react-router-dom",
+            "prop-types",
+            "moment",
+            "semantic-ui-react",
+            "whatwg-fetch"
+        ]
     },
     output: {
         path: path.resolve("dist"),
@@ -74,7 +86,10 @@ module.exports = {
                 NODE_ENV: JSON.stringify(process.env.NODE_ENV)
             }
         }),
-        new DotEnvPlugin()
+        new DotEnvPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "vendor"
+        })
     ],
     devServer: {
         historyApiFallback: true
