@@ -1,6 +1,7 @@
 import React from "react";
 import {Container} from "semantic-ui-react";
 import PropTypes from "prop-types";
+import SidebarMenu from "./SidebarMenu";
 
 export default class FullContainer extends React.Component {
     static propTypes = {
@@ -8,9 +9,16 @@ export default class FullContainer extends React.Component {
     };
 
     render() {
+        const contentStyle = {
+            marginLeft: "250px"
+        };
+
         return (
             <Container fluid={true}>
-                {this.props.children}
+                <SidebarMenu />
+                <div style={contentStyle}>
+                    {this.props.children}
+                </div>
             </Container>
         );
     }
