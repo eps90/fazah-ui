@@ -22,11 +22,12 @@ const mapStateToProps = (state) => {
     return {
         projects: state.projects.items,
         loading: !!state.projects.loading,
-        hasError: !!state.projects.error
+        hasError: !!state.projects.error,
+        title: "Projects"
     };
 };
 
 export default compose(
     connect(mapStateToProps, { listProjects, selectProject }),
-    withTitle("Projects")
+    withTitle
 )(ProjectListContainer);

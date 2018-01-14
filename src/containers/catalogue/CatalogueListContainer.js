@@ -23,11 +23,12 @@ const mapStateToProps = (state) => {
     return {
         catalogues: state.catalogues.items,
         loading: !!state.catalogues.loading,
-        hasError: !!state.catalogues.error
+        hasError: !!state.catalogues.error,
+        title: "Catalogues"
     };
 };
 
 export default compose(
     connect(mapStateToProps, { listCatalogues: listCataloguesForProject }),
-    withTitle("Catalogues"),
+    withTitle,
 )(CatalogueListContainer);
