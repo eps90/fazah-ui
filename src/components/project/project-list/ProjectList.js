@@ -43,7 +43,7 @@ export default class ProjectList extends React.Component {
 
         return (
             <Dimmer.Dimmable as={Segment} padded="very" dimmed={this.props.loading}>
-                <Dimmer active={this.props.loading}>
+                <Dimmer active={this.props.loading} inverted>
                     <Loader size="big" />
                 </Dimmer>
 
