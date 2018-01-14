@@ -1,4 +1,9 @@
 .logo {
   height: 64px;
   width: auto;
+
+  &.inverted {
+    fill: white !important;
+    height: 55px;
+  }
 }
