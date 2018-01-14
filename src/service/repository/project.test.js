@@ -3,7 +3,7 @@
 import fetchMock from "fetch-mock";
 import Project from "../../model/Project";
 import Metadata from "../../model/Metadata";
-import {fetchProjects} from "./project";
+import {fetchProject, fetchProjects} from "./project";
 
 describe("Fetching projects", () => {
     const defaultProjectsUrl = "end:/api/projects.json?enabled=true";
@@ -95,6 +95,48 @@ describe("Fetching projects", () => {
 
             return fetchProjects(requestParams).then(() => {
                 expect(fetchMock.called(expectedEndpoint)).toBe(true);
+            });
+        });
+    });
+
+    describe("single project", () => {
+        it("should return a single project", () => {
+            expect.assertions(1);
+            const projectId = "1231231";
+            const expectedEndpoint = `end:/api/projects/${projectId}.json`;
+
+            fetchMock.get(expectedEndpoint, getSampleServerResponse()[0]);
+
+            const expectedProject = getParsedProjects()[0];
+
+            return fetchProject(projectId).then(project => {
+                expect(project).toEqual(expectedProject);
+            });
+        });
+
+        it("should throw when project is not found", () => {
+            expect.assertions(1);
+
+            const projectId = "1231231";
+            const expectedEndpoint = `end:/api/projects/${projectId}.json`;
+
+            fetchMock.get(expectedEndpoint, {status: 404, body: "{}"});
+
+            return fetchProject(projectId).catch(err=> {
+                expect(err).toBeDefined();
+            });
+        });
+
+        it("should throw when error occurred on server side", () => {
+            expect.assertions(1);
+
+            const projectId = "1231231";
+            const expectedEndpoint = `end:/api/projects/${projectId}.json`;
+
+            fetchMock.get(expectedEndpoint, {status: 503, body: "{}"});
+
+            return fetchProject(projectId).catch(err=> {
+                expect(err).toBeDefined();
             });
         });
     });
