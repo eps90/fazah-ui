@@ -1,4 +1,8 @@
-import {PROJECT_SELECTED, PROJECTS_REQUEST_FAILURE, PROJECTS_REQUEST_SUCCESS, PROJECTS_REQUESTED} from "./actions";
+import {
+    PROJECT_SELECTION_FAIL,
+    PROJECT_SELECTION_REQUESTED, PROJECT_SELECTION_SUCCESS, PROJECTS_REQUEST_FAILURE, PROJECTS_REQUEST_SUCCESS,
+    PROJECTS_REQUESTED
+} from "./actions";
 
 export const initialState = {
     loading: false,
@@ -30,10 +34,26 @@ const projects = (state = initialState, action) => {
             items: [],
             error: true
         };
-    case PROJECT_SELECTED:
+    case PROJECT_SELECTION_REQUESTED:
         return {
             ...state,
-            selectedProject: state.items.filter(project => project.id === action.projectId)[0] || null
+            loading: true,
+            error: false,
+            selectedProject: null
+        };
+    case PROJECT_SELECTION_SUCCESS:
+        return {
+            ...state,
+            loading: false,
+            error: false,
+            selectedProject: action.selectedProject
+        };
+    case PROJECT_SELECTION_FAIL:
+        return {
+            ...state,
+            loading: false,
+            error: true,
+            selectedProject: null
         };
     default:
         return state;

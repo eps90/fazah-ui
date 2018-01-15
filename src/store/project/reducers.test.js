@@ -1,5 +1,8 @@
 import projectsReducer, {initialState} from "./reducers";
-import {failProjectListing, listProjects, selectProject, setProjects} from "./actions";
+import {
+    failProjectListing, listProjects, selectProject, selectProjectFailure, selectProjectSuccess,
+    setProjects
+} from "./actions";
 
 describe("project reducer", () => {
     it("should return initial state", () => {
@@ -49,56 +52,46 @@ describe("project reducer", () => {
         expect(actualState).toEqual(expectedState);
     });
 
-    it("should be able to select a project", () => {
-        const projectId = "123123";
-        const action = selectProject(projectId);
-        const currentState = {
-            ...initialState,
-            items: [
-                {
-                    id: projectId,
-                    name: "My first project"
-                },
-                {
-                    id: "32123212",
-                    name: "Do not select this"
-                }
-            ]
-        };
-        const expectedState = {
-            ...currentState,
-            selectedProject: {
-                id: projectId,
-                name: "My first project"
-            }
-        };
-        const actualState = projectsReducer(currentState, action);
+    describe("Project selection", () => {
+        it("should be able to request for project selection", () => {
+            const projectId = "123123";
+            const action = selectProject(projectId);
+            const expectedState = {
+                ...initialState,
+                selectedProject: null,
+                loading: true,
+                error: false
+            };
+            const actualState = projectsReducer(initialState, action);
 
-        expect(expectedState).toEqual(actualState);
-    });
+            expect(expectedState).toEqual(actualState);
+        });
 
-    it("should set selected project to null when no project has been found", () => {
-        const projectId = "123123";
-        const action = selectProject(projectId);
-        const currentState = {
-            ...initialState,
-            items: [
-                {
-                    id: "555555",
-                    name: "My first project"
-                },
-                {
-                    id: "32123212",
-                    name: "Do not select this"
-                }
-            ]
-        };
-        const expectedState = {
-            ...currentState,
-            selectedProject: null
-        };
-        const actualState = projectsReducer(currentState, action);
+        it("it should set projects on success", () => {
+            const project = {id: "1231", name: "My awesome project"};
+            const action = selectProjectSuccess(project);
+            const expectedState = {
+                ...initialState,
+                selectedProject: project,
+                loading: false,
+                error: false
+            };
+            const actualState = projectsReducer(initialState, action);
 
-        expect(expectedState).toEqual(actualState);
+            expect(actualState).toEqual(expectedState);
+        });
+
+        it("it should set an error when selecting projects fails", () => {
+            const action = selectProjectFailure();
+            const expectedState = {
+                ...initialState,
+                selectedProject: null,
+                loading: false,
+                error: true
+            };
+            const actualState = projectsReducer(initialState, action);
+
+            expect(actualState).toEqual(expectedState);
+        });
     });
 });
