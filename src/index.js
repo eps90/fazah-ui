@@ -8,20 +8,29 @@ import {Provider} from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import reducers from "./store/reducers";
 import sagas from "./store/sagas";
-import {BrowserRouter as Router} from "react-router-dom";
+import createHistory from "history/createBrowserHistory";
+import {ConnectedRouter, routerMiddleware as createRouterMiddleware} from "react-router-redux";
 
 import "semantic-ui-css/semantic.css";
 
+const history = createHistory();
+const routerMiddleware = createRouterMiddleware(history);
+
 const sagaMiddleware = createSagaMiddleware();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(applyMiddleware(sagaMiddleware)));
+const store = createStore(
+    reducers,
+    composeEnhancers(
+        applyMiddleware(sagaMiddleware, routerMiddleware)
+    )
+);
 sagaMiddleware.run(sagas);
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
+        <ConnectedRouter history={history}>
             <App />
-        </Router>
+        </ConnectedRouter>
     </Provider>,
     document.getElementById("root")
 );
