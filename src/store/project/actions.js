@@ -4,6 +4,7 @@ export const PROJECTS_REQUEST_FAILURE = "PROJECTS_REQUEST_FAILURE";
 export const PROJECT_SELECTION_REQUESTED = "PROJECT_SELECTION_REQUESTED";
 export const PROJECT_SELECTION_SUCCESS = "PROJECT_SELECTION_SUCCESS";
 export const PROJECT_SELECTION_FAIL = "PROJECT_SELECTION_FAIL";
+export const SHOW_PROJECT_CATALOGUES = "SHOW_PROJECT_CATALOGUES";
 
 export function listProjects() {
     return {
@@ -41,5 +42,12 @@ export function selectProjectSuccess(selectedProject) {
 export function selectProjectFailure() {
     return {
         type: PROJECT_SELECTION_FAIL
+    };
+}
+
+export function showProjectCatalogues(projectId) {
+    return {
+        type: SHOW_PROJECT_CATALOGUES,
+        projectId
     };
 }

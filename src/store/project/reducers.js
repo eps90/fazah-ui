@@ -1,7 +1,7 @@
 import {
     PROJECT_SELECTION_FAIL,
     PROJECT_SELECTION_REQUESTED, PROJECT_SELECTION_SUCCESS, PROJECTS_REQUEST_FAILURE, PROJECTS_REQUEST_SUCCESS,
-    PROJECTS_REQUESTED
+    PROJECTS_REQUESTED, SHOW_PROJECT_CATALOGUES
 } from "./actions";
 
 export const initialState = {
@@ -53,6 +53,13 @@ const projects = (state = initialState, action) => {
             ...state,
             loading: false,
             error: true,
+            selectedProject: null
+        };
+    case SHOW_PROJECT_CATALOGUES:
+        return {
+            ...state,
+            loading: false,
+            error: false,
             selectedProject: null
         };
     default:

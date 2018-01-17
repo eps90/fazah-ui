@@ -1,7 +1,7 @@
 import projectsReducer, {initialState} from "./reducers";
 import {
     failProjectListing, listProjects, selectProject, selectProjectFailure, selectProjectSuccess,
-    setProjects
+    setProjects, showProjectCatalogues
 } from "./actions";
 
 describe("project reducer", () => {
@@ -88,6 +88,20 @@ describe("project reducer", () => {
                 selectedProject: null,
                 loading: false,
                 error: true
+            };
+            const actualState = projectsReducer(initialState, action);
+
+            expect(actualState).toEqual(expectedState);
+        });
+
+        it("should open catalogues for projects", () => {
+            const projectId = "123123";
+            const action = showProjectCatalogues(projectId);
+            const expectedState = {
+                ...initialState,
+                selectedProject: null,
+                loading: false,
+                error: false
             };
             const actualState = projectsReducer(initialState, action);
 
