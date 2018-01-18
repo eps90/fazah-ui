@@ -17,7 +17,6 @@ export default class ProjectListItem extends React.Component {
 
     openProject() {
         this.props.onProjectSelected(this.props.project.id);
-        this.props.history.push(this.getCataloguesLink());
     }
 
     render() {

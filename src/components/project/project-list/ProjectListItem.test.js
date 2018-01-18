@@ -37,20 +37,6 @@ describe("ProjectListItem component", () => {
         expect(wrapper.find(Flag).at(1).props().name).toEqual("pl");
     });
 
-    it("should redirect to catalogues route on click", () => {
-        const projectId = "321321";
-        const project = new Project(projectId, "This is my project");
-        const component = createComponentUnderTest({project});
-        const wrapper = mount(component);
-        wrapper.update();
-        wrapper.simulate("click");
-
-        const location = wrapper.find(ProjectListItem).props().location;
-        const expectedPath = `/projects/${projectId}/catalogues`;
-
-        expect(location.pathname).toEqual(expectedPath);
-    });
-
     it("should call passed action", () => {
         const projectId = "321312";
         const project = new Project(projectId, "My awesome project");
