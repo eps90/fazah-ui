@@ -61,12 +61,12 @@ describe("ProjectList component", () => {
     function createComponentUnderTest(targetValues) {
         const {
             listProjects = jest.fn(),
-            selectProject = jest.fn(),
+            showProjectCatalogues = jest.fn(),
             projects = [],
             hasError = false,
             loading = false
         } = targetValues;
-        return <ProjectList listProjects={listProjects} selectProject={selectProject}
+        return <ProjectList listProjects={listProjects} showProjectCatalogues={showProjectCatalogues}
             projects={projects} hasError={hasError} loading={loading}/>;
     }
 });

@@ -7,7 +7,7 @@ import {Dimmer, Icon, List, Loader, Message, Segment} from "semantic-ui-react";
 export default class ProjectList extends React.Component {
     static propTypes = {
         listProjects: PropTypes.func.isRequired,
-        selectProject: PropTypes.func.isRequired,
+        showProjectCatalogues: PropTypes.func.isRequired,
         loading: PropTypes.bool,
         hasError: PropTypes.bool,
         projects: PropTypes.arrayOf(PropTypes.instanceOf(Project)),
@@ -51,7 +51,7 @@ export default class ProjectList extends React.Component {
 
                 <List selection divided size="large" verticalAlign="middle">
                     {this.props.projects.map(project => (
-                        <ProjectListItem history={this.props.history} onProjectSelected={this.props.selectProject} key={project.id} project={project}/>
+                        <ProjectListItem history={this.props.history} onProjectSelected={this.props.showProjectCatalogues} key={project.id} project={project}/>
                     ))}
                 </List>
             </Dimmer.Dimmable>

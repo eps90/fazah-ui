@@ -37,7 +37,7 @@ describe("ProjectListContainer", () => {
         const component = createComponentWithState();
         const wrapper = mount(component);
 
-        expect(wrapper.find(ProjectList).first().props().selectProject).toBeDefined();
+        expect(wrapper.find(ProjectList).first().props().showProjectCatalogues).toBeDefined();
     });
 
     it("it should pass loading state to ProjectList component", () => {
@@ -82,10 +82,10 @@ describe("ProjectListContainer", () => {
         ];
     }
 
-    function mockExternalActions({listProjects = jest.fn(), selectProject = jest.fn()} = {}) {
+    function mockExternalActions({listProjects = jest.fn(), showProjectCatalogues = jest.fn()} = {}) {
         jest.doMock("../../store/project/actions", {
             listProjects,
-            selectProject
+            showProjectCatalogues,
         });
     }
 });
