@@ -5,6 +5,7 @@ import {expectSaga, testSaga} from "redux-saga-test-plan";
 import {throwError} from "redux-saga-test-plan/providers";
 import {call} from "redux-saga/effects";
 import {failCataloguesListing, listCataloguesForProject, setCatalogues} from "./actions";
+import {selectProject} from "../project/actions";
 
 describe("Catalogue sagas", () => {
     describe("unit", () => {
@@ -17,6 +18,8 @@ describe("Catalogue sagas", () => {
 
             testSaga(fetchCatalogues, {projectId})
                 .next()
+                .put(selectProject(projectId))
+                .next()
                 .call(fetchCataloguesForProject, projectId)
                 .next(cataloguesFetched)
                 .put(setCatalogues(cataloguesFetched))
@@ -27,6 +30,8 @@ describe("Catalogue sagas", () => {
         it("should dispatch an error action when catalogues fetching fails", () => {
             const projectId = "321312";
             testSaga(fetchCatalogues, {projectId})
+                .next()
+                .put(selectProject(projectId))
                 .next()
                 .call(fetchCataloguesForProject, projectId)
                 .throw()
