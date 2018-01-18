@@ -3,11 +3,13 @@ import * as matchers from "redux-saga-test-plan/matchers";
 import {throwError} from "redux-saga-test-plan/providers";
 import {
     failProjectListing, listProjects, selectProject, selectProjectFailure, selectProjectSuccess,
-    setProjects
+    setProjects, showProjectCatalogues
 } from "./actions";
 import watchProjects, {fetchProjectList, selectOrFetchProject} from "./sagas";
 import {fetchProject, fetchProjects} from "../../service/repository/project";
 import {getProject} from "./../selectors";
+import {push} from "react-router-redux";
+import {select} from "redux-saga/effects";
 
 describe("projects sagas", () => {
     describe("Fetch all projects", () => {
@@ -145,6 +147,21 @@ describe("projects sagas", () => {
                     ])
                     .put(selectProjectFailure())
                     .dispatch(selectProject(projectId))
+                    .silentRun();
+            });
+
+            it("should select a project and open a URL for catalogues", () => {
+                const projectId = "1111";
+                const foundProject = {"id": "1111", "name": "My awesome project"};
+                const expectedUrl = `/projects/${projectId}/catalogues`;
+
+                return expectSaga(watchProjects)
+                    .provide([
+                        [select(getProject, projectId), foundProject]
+                    ])
+                    .put(selectProjectSuccess(foundProject))
+                    .put(push(expectedUrl))
+                    .dispatch(showProjectCatalogues(projectId))
                     .silentRun();
             });
         });
