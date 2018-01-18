@@ -8,7 +8,6 @@ export default class ProjectListItem extends React.Component {
     static propTypes = {
         project: PropTypes.instanceOf(Project).isRequired,
         onProjectSelected: PropTypes.func.isRequired,
-        history: PropTypes.any
     };
 
     getCataloguesLink() {

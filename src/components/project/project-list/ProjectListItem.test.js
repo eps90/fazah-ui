@@ -2,7 +2,6 @@ import React from "react";
 import ProjectListItem from "./ProjectListItem";
 import Project from "../../../model/Project";
 import {mount, shallow} from "enzyme";
-import {MemoryRouter, Route} from "react-router-dom";
 import Metadata from "../../../model/Metadata";
 import {Flag} from "semantic-ui-react";
 
@@ -52,12 +51,6 @@ describe("ProjectListItem component", () => {
     function createComponentUnderTest(params) {
         const {project, onProjectSelected = jest.fn()} = params;
 
-        return (
-            <MemoryRouter>
-                <Route render={(props) => (
-                    <ProjectListItem project={project} onProjectSelected={onProjectSelected} {...props} />
-                )} />
-            </MemoryRouter>
-        );
+        return <ProjectListItem project={project} onProjectSelected={onProjectSelected} />;
     }
 });

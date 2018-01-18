@@ -51,7 +51,7 @@ export default class ProjectList extends React.Component {
 
                 <List selection divided size="large" verticalAlign="middle">
                     {this.props.projects.map(project => (
-                        <ProjectListItem history={this.props.history} onProjectSelected={this.props.showProjectCatalogues} key={project.id} project={project}/>
+                        <ProjectListItem onProjectSelected={this.props.showProjectCatalogues} key={project.id} project={project}/>
                     ))}
                 </List>
             </Dimmer.Dimmable>
