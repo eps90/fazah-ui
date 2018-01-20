@@ -5,6 +5,7 @@ import {mount} from "enzyme";
 import CatalogueListContainer from "./CatalogueListContainer";
 import CatalogueList from "../../components/catalogue/catalogue-list/CatalogueList";
 import Catalogue from "../../model/Catalogue";
+import {MemoryRouter} from "react-router-dom";
 
 describe("CataloguesListContainer", () => {
     const mockStore = configureStore();
@@ -51,13 +52,18 @@ describe("CataloguesListContainer", () => {
                 loading,
                 items,
                 error
+            },
+            projects: {
+
             }
         };
         const store = mockStore(initialState);
 
         return (
             <Provider store={store}>
-                <CatalogueListContainer projectId="123" />
+                <MemoryRouter>
+                    <CatalogueListContainer projectId="123" />
+                </MemoryRouter>
             </Provider>
         );
     }

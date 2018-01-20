@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import {withTitle} from "../../components/helper/withTitle";
 import {compose} from "redux";
 import CatalogueList from "../../components/catalogue/catalogue-list/CatalogueList";
+import Breadcrumb from "../../components/layout/breadcrumb/Breadcrumb";
 
 const CatalogueListContainer = ({catalogues, listCatalogues, loading, hasError, projectId}) => {
     return <CatalogueList catalogues={catalogues} listCatalogues={listCatalogues}
@@ -20,11 +21,28 @@ CatalogueListContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => {
+    const title = state.projects.selectedProject
+        ? state.projects.selectedProject.name
+        : "[unknown project]";
+
+    // @todo Move this to router-aware component
+    const breadCrumbs = [
+        {
+            label: "Projects",
+            link: "/"
+        },
+        {
+            label: `Project: ${title}`
+        }
+    ];
+    const subtitle = <Breadcrumb items={breadCrumbs}/>;
+
     return {
         catalogues: state.catalogues.items,
         loading: !!state.catalogues.loading,
         hasError: !!state.catalogues.error,
-        title: "Catalogues"
+        title,
+        subtitle
     };
 };
 
