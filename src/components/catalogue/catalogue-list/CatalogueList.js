@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import CatalogueListItem from "./CatalogueListItem";
 import Catalogue from "../../../model/Catalogue";
-import {Dimmer, Icon, List, Loader, Message, Segment} from "semantic-ui-react";
+import {Dimmer, Icon, List, Loader, Message} from "semantic-ui-react";
 
 export default class CatalogueList extends React.Component {
     static propTypes = {
@@ -41,7 +41,7 @@ export default class CatalogueList extends React.Component {
         }
 
         return (
-            <Dimmer.Dimmable as={Segment} padded="very" dimmed={this.props.loading}>
+            <Dimmer.Dimmable dimmed={this.props.loading}>
                 <Dimmer active={this.props.loading} inverted>
                     <Loader size="big" />
                 </Dimmer>
