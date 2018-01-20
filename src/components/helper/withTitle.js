@@ -21,7 +21,7 @@ export const withTitle = WrappedComponent => {
     };
     hoc.propTypes = {
         title: PropTypes.string.isRequired,
-        subtitle: PropTypes.string
+        subtitle: PropTypes.node
     };
     hoc.displayName = `withTitle(${getDisplayName(WrappedComponent)})`;
     return hoc;
