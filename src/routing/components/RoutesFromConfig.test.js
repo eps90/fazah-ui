@@ -29,6 +29,10 @@ describe("RoutesFromConfig component", () => {
             render: () => {
                 return <TestComponent />;
             }
+        },
+        {
+            path: "/routeD",
+            redirectTo: "/routeA"
         }
     ];
 
@@ -58,6 +62,11 @@ describe("RoutesFromConfig component", () => {
     it("should render routes with function", () => {
         let component = mount(createComponentUnderTest(routingConfig, 2));
         expect(component.find(TestComponent)).toHaveLength(1);
+    });
+
+    it("should render a redirect", () => {
+        let component = mount(createComponentUnderTest(routingConfig, 3));
+        expect(component.find(Route).first().prop("path")).toEqual("/routeA");
     });
 });
 
