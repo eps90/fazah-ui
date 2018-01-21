@@ -22,6 +22,13 @@ describe("get content routes helper", () => {
         expect(getContentRoutes()).toEqual(expect.arrayContaining(expectedRedirectRoute));
     });
 
+    it("should return a route with render property", () => {
+        const getContentRoutes = createGetContentRoutes();
+
+        const expectedRedirectRoute = [{render: expect.any(Function)}];
+        expect(getContentRoutes()).toEqual(expect.arrayContaining(expectedRedirectRoute));
+    });
+
     function createGetContentRoutes() {
         const routesConfig = {
             routeA: {
@@ -33,6 +40,9 @@ describe("get content routes helper", () => {
             routeC: {},
             routeD: {
                 redirectTo: "/aaa"
+            },
+            routeE: {
+                render: () => TestComponent
             }
         };
         jest.doMock("./../routingConfig", () => routesConfig);
