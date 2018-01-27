@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import {withTitle} from "../../components/helper/withTitle";
 import {compose} from "redux";
 import CatalogueList from "../../components/catalogue/catalogue-list/CatalogueList";
-import Breadcrumb from "../../components/layout/breadcrumb/Breadcrumb";
+import Breadcrumbs from "../../components/layout/breadcrumb/Breadcrumbs";
 
 const CatalogueListContainer = ({catalogues, listCatalogues, loading, hasError, projectId}) => {
     return <CatalogueList catalogues={catalogues} listCatalogues={listCatalogues}
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => {
             label: `Project: ${title}`
         }
     ];
-    const subtitle = <Breadcrumb items={breadCrumbs}/>;
+    const subtitle = <Breadcrumbs items={breadCrumbs}/>;
 
     return {
         catalogues: state.catalogues.items,

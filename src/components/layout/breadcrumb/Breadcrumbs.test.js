@@ -1,12 +1,12 @@
 import React from "react";
 import {mount} from "enzyme";
-import Breadcrumb from "./Breadcrumb";
+import Breadcrumbs from "./Breadcrumbs";
 import {Link, MemoryRouter} from "react-router-dom";
 import {Breadcrumb as SuiBreadcrumb} from "semantic-ui-react";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 
-describe("Breadcrumb", () => {
+describe("Breadcrumbs component", () => {
     const breadcrumbsConfig = [
         {
             label: "Home",
@@ -104,7 +104,7 @@ describe("Breadcrumb", () => {
         return (
             <Provider store={store}>
                 <MemoryRouter>
-                    <Breadcrumb items={config}/>
+                    <Breadcrumbs items={config}/>
                 </MemoryRouter>
             </Provider>
         );

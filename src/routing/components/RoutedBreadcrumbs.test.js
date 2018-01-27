@@ -1,12 +1,12 @@
 import React from "react";
 import {MemoryRouter} from "react-router-dom";
 import {mount} from "enzyme";
-import Breadcrumb from "../../components/layout/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../components/layout/breadcrumb/Breadcrumbs";
 import RoutedBreadcrumbs from "./RoutedBreadcrumbs";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 
-describe("BreadcrumbsFromConfig component", () => {
+describe("RoutedBreadcrumbs component", () => {
     const routingConfig = [
         {
             path: "/"
@@ -42,7 +42,7 @@ describe("BreadcrumbsFromConfig component", () => {
         expect(component.find(Breadcrumb)).toHaveLength(1);
     });
 
-    it("should not render Breadcrumb if there is no breadcrumbs provided", () => {
+    it("should not render Breadcrumbs if there is no breadcrumbs provided", () => {
         const component = mount(getComponentUnderTest(0));
         expect(component.find(Breadcrumb)).toHaveLength(0);
     });

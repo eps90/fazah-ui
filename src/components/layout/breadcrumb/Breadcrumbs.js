@@ -4,7 +4,7 @@ import {Breadcrumb as SuiBreadcrumb} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
-class Breadcrumb extends React.Component {
+class Breadcrumbs extends React.Component {
     static propTypes = {
         items: PropTypes.array.isRequired,
         store: PropTypes.object
@@ -72,4 +72,4 @@ export default connect(
     store => {
         return {store};
     }
-)(Breadcrumb);
+)(Breadcrumbs);

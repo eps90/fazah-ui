@@ -1,9 +1,9 @@
 import React from "react";
-import Breadcrumb from "../../components/layout/breadcrumb/Breadcrumb";
+import Breadcrumbs from "../../components/layout/breadcrumb/Breadcrumbs";
 import {Route, Switch} from "react-router-dom";
 import PropTypes from "prop-types";
 
-export default class BreadcrumbsFromConfig extends React.Component {
+export default class RoutedBreadcrumbs extends React.Component {
     static propTypes = {
         config: PropTypes.arrayOf(
             PropTypes.shape({
@@ -24,7 +24,7 @@ export default class BreadcrumbsFromConfig extends React.Component {
         return (
             breadcrumbs &&
             <Route key={path} path={path} exact={exact} render={() => {
-                return <Breadcrumb items={breadcrumbs} />;
+                return <Breadcrumbs items={breadcrumbs} />;
             }} />
         );
     }
