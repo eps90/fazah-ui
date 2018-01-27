@@ -3,6 +3,8 @@ import {MemoryRouter} from "react-router-dom";
 import {mount} from "enzyme";
 import Breadcrumb from "../../components/layout/breadcrumb/Breadcrumb";
 import RoutedBreadcrumbs from "./RoutedBreadcrumbs";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
 
 describe("BreadcrumbsFromConfig component", () => {
     const routingConfig = [
@@ -46,11 +48,16 @@ describe("BreadcrumbsFromConfig component", () => {
     });
 
     function getComponentUnderTest(initialIndex = 1) {
+        const mockStore = configureStore();
+        const store = mockStore({});
+
         const initialEntries = routingConfig.map(route => route.path);
         return (
-            <MemoryRouter initialEntries={initialEntries} initialIndex={initialIndex}>
-                <RoutedBreadcrumbs config={routingConfig} />
-            </MemoryRouter>
+            <Provider store={store}>
+                <MemoryRouter initialEntries={initialEntries} initialIndex={initialIndex}>
+                    <RoutedBreadcrumbs config={routingConfig} />
+                </MemoryRouter>
+            </Provider>
         );
     }
 });
