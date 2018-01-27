@@ -47,6 +47,18 @@ describe("Breadcrumb", () => {
         expect(lastSection.prop("active")).toBeTruthy();
     });
 
+    it("should be able to render a link as a last element", () => {
+        const config = [
+            {
+                link: "/routeAbc",
+                label: "Route Abc"
+            }
+        ];
+        const component = mount(createComponent(config));
+        expect(component.find(Link)).toHaveLength(1);
+        expect(component.find(SuiBreadcrumb.Section).last().prop("active")).toBeTruthy();
+    });
+
     describe("with redux store", () => {
         it("should be able to render a breadcrumb label by state from store", () => {
             const breadcrumbsWithState = [
