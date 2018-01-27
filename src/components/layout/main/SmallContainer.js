@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Container} from "semantic-ui-react";
+import Header from "../header/Header";
 
 export default class SmallContainer extends React.Component {
     static propTypes = {
@@ -9,9 +10,12 @@ export default class SmallContainer extends React.Component {
 
     render() {
         return (
-            <Container>
-                {this.props.children}
-            </Container>
+            <div>
+                <Header/>
+                <Container>
+                    {this.props.children}
+                </Container>
+            </div>
         );
     }
 }
