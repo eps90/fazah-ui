@@ -3,7 +3,7 @@ import ProjectList from "../../components/project/project-list/ProjectList";
 import {connect} from "react-redux";
 import {listProjects, showProjectCatalogues} from "../../store/project/actions";
 import PropTypes from "prop-types";
-import {withTitle} from "../../components/helper/withTitle";
+import {withHeader} from "../../components/helper/withHeader";
 import {compose} from "redux";
 
 const ProjectListContainer = ({projects, listProjects, loading, hasError, showProjectCatalogues, ...props}) => (
@@ -29,5 +29,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps, { listProjects, showProjectCatalogues }),
-    withTitle
+    withHeader
 )(ProjectListContainer);

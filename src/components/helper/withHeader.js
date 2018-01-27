@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Header} from "semantic-ui-react";
 
-export const withTitle = WrappedComponent => {
+export const withHeader = WrappedComponent => {
     const hoc = (props) => {
         const {subtitle, title, ...rest} = props;
         const subtitleContents = subtitle

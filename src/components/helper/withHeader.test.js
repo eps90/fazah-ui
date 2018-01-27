@@ -1,9 +1,9 @@
 import React from "react";
-import {withTitle} from "./withTitle";
+import {withHeader} from "./withHeader";
 import {shallow} from "enzyme";
 import {Header} from "semantic-ui-react";
 
-describe("withTitle helper", () => {
+describe("withHeader helper", () => {
     describe("Title", () => {
         it("should render a title before wrapped component", () => {
             const properties = {
@@ -56,7 +56,7 @@ class TestComponent extends React.Component {
 }
 
 function getComponentUnderTest(properties) {
-    const WrappedComponent = withTitle(TestComponent);
+    const WrappedComponent = withHeader(TestComponent);
     return <WrappedComponent {...properties} />;
 
 }

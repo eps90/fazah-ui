@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {listCataloguesForProject} from "../../store/catalogue/actions";
 import PropTypes from "prop-types";
-import {withTitle} from "../../components/helper/withTitle";
+import {withHeader} from "../../components/helper/withHeader";
 import {compose} from "redux";
 import CatalogueList from "../../components/catalogue/catalogue-list/CatalogueList";
 import Breadcrumbs from "../../components/layout/breadcrumb/Breadcrumbs";
@@ -48,5 +48,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps, { listCatalogues: listCataloguesForProject }),
-    withTitle,
+    withHeader,
 )(CatalogueListContainer);
