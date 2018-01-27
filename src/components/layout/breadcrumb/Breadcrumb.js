@@ -41,13 +41,18 @@ class Breadcrumb extends React.Component {
         return items.map(this.createSection, this);
     }
 
+    createSectionContents({link, label}) {
+        return link !== undefined
+            ? this.createLink(link, label)
+            : this.createLabel(label);
+    }
+
     createSection(item, itemIdx, items) {
         const isLastElement = items.length === itemIdx + 1;
         return (
             <Fragment key={itemIdx}>
                 <SuiBreadcrumb.Section active={isLastElement}>
-                    {!isLastElement && this.createLink(item.link, item.label)}
-                    {isLastElement && this.createLabel(item.label)}
+                    {this.createSectionContents(item)}
                 </SuiBreadcrumb.Section>
                 {!isLastElement && <SuiBreadcrumb.Divider icon="right angle"/>}
             </Fragment>
