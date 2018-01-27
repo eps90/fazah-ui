@@ -2,16 +2,39 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import {Breadcrumb as SuiBreadcrumb} from "semantic-ui-react";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
 
-export default class Breadcrumb extends React.Component {
+class Breadcrumb extends React.Component {
     static propTypes = {
-        items: PropTypes.array.isRequired
+        items: PropTypes.array.isRequired,
+        store: PropTypes.object
     };
 
     createLink(linkAnchor, contents) {
+        let contentsParsed = contents;
+        let linkParsed = linkAnchor;
+        if (typeof contents === "function") {
+            contentsParsed = this.createContentFromFunction(contents);
+        }
+        if (typeof linkAnchor === "function") {
+            linkParsed = this.createContentFromFunction(linkAnchor);
+        }
         return (
-            <Link to={linkAnchor}>{contents}</Link>
+            <Link to={linkParsed}>{contentsParsed}</Link>
         );
+    }
+
+    createLabel(contents) {
+        let contentsParsed = contents;
+        if (typeof contents === "function") {
+            contentsParsed = this.createContentFromFunction(contents);
+        }
+        return contentsParsed;
+    }
+
+    createContentFromFunction(content) {
+        const {store} = this.props;
+        return content({store});
     }
 
     createList(items) {
@@ -24,7 +47,7 @@ export default class Breadcrumb extends React.Component {
             <Fragment key={itemIdx}>
                 <SuiBreadcrumb.Section active={isLastElement}>
                     {!isLastElement && this.createLink(item.link, item.label)}
-                    {isLastElement && item.label}
+                    {isLastElement && this.createLabel(item.label)}
                 </SuiBreadcrumb.Section>
                 {!isLastElement && <SuiBreadcrumb.Divider icon="right angle"/>}
             </Fragment>
@@ -40,3 +63,8 @@ export default class Breadcrumb extends React.Component {
     }
 }
 
+export default connect(
+    store => {
+        return {store};
+    }
+)(Breadcrumb);

@@ -3,6 +3,8 @@ import {mount} from "enzyme";
 import Breadcrumb from "./Breadcrumb";
 import {Link, MemoryRouter} from "react-router-dom";
 import {Breadcrumb as SuiBreadcrumb} from "semantic-ui-react";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
 
 describe("Breadcrumb", () => {
     const breadcrumbsConfig = [
@@ -45,11 +47,54 @@ describe("Breadcrumb", () => {
         expect(lastSection.prop("active")).toBeTruthy();
     });
 
-    function createComponent() {
+    describe("with redux store", () => {
+        it("should be able to render a breadcrumb label by state from store", () => {
+            const breadcrumbsWithState = [
+                {
+                    link: "/routeA",
+                    label: ({store}) => store.selectedProject.name
+                }
+            ];
+            const component = mount(createComponent(breadcrumbsWithState));
+            const breadcrumbSection = component.find(SuiBreadcrumb.Section).last();
+            expect(breadcrumbSection.text()).toEqual("My project");
+        });
+
+        it("should be able to render a breadcrumb link by state from store", () => {
+            const breadcrumbsWithState = [
+                {
+                    label: "Catalogues",
+                    link: ({store}) => {
+                        return `/project/${store.selectedProject.id}/catalogues`;
+                    }
+                },
+                {
+                    label: "This catalogue"
+                }
+            ];
+            const component = mount(createComponent(breadcrumbsWithState));
+            const breadcrumbLink = component.find(Link).last();
+
+            expect(breadcrumbLink.prop("to")).toEqual("/project/123/catalogues");
+        });
+    });
+
+    function createComponent(config = breadcrumbsConfig) {
+        const state = {
+            selectedProject: {
+                id: 123,
+                name: "My project"
+            }
+        };
+        const mockStore = configureStore();
+        const store = mockStore(state);
+
         return (
-            <MemoryRouter>
-                <Breadcrumb items={breadcrumbsConfig}/>
-            </MemoryRouter>
+            <Provider store={store}>
+                <MemoryRouter>
+                    <Breadcrumb items={config}/>
+                </MemoryRouter>
+            </Provider>
         );
     }
 });
