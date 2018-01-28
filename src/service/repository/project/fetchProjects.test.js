@@ -1,11 +1,11 @@
 // @flow
 
 import fetchMock from "fetch-mock";
-import Project from "../../model/Project";
-import Metadata from "../../model/Metadata";
-import {fetchProject, fetchProjects} from "./project";
+import fetchProjects from "./fetchProjects";
+import Project from "../../../model/Project";
+import Metadata from "../../../model/Metadata";
 
-describe("Fetching projects", () => {
+describe("fetchProjects", () => {
     const defaultProjectsUrl = "end:/api/projects.json?enabled=true";
 
     afterEach(() => {
@@ -21,43 +21,41 @@ describe("Fetching projects", () => {
         });
     });
 
-    describe("all projects", () => {
-        it("should return a list of all projects", () => {
-            expect.assertions(1);
-            fetchMock.get(defaultProjectsUrl, getSampleServerResponse());
+    it("should return a list of all projects", () => {
+        expect.assertions(1);
+        fetchMock.get(defaultProjectsUrl, getSampleServerResponse());
 
-            return fetchProjects().then(actualResult => {
-                expect(actualResult).toEqual(getParsedProjects());
-            });
+        return fetchProjects().then(actualResult => {
+            expect(actualResult).toEqual(getParsedProjects());
         });
+    });
 
-        it("should return an empty array in case of no project", () => {
-            expect.assertions(1);
-            fetchMock.get(defaultProjectsUrl, []);
+    it("should return an empty array in case of no project", () => {
+        expect.assertions(1);
+        fetchMock.get(defaultProjectsUrl, []);
 
-            return fetchProjects().then(actualResult => {
-                const expectedResult = [];
-                expect(actualResult).toEqual(expectedResult);
-            });
+        return fetchProjects().then(actualResult => {
+            const expectedResult = [];
+            expect(actualResult).toEqual(expectedResult);
         });
+    });
 
-        it("should return an empty array in case when server response is wrongly formatted", () => {
-            expect.assertions(1);
-            fetchMock.get(defaultProjectsUrl, {someKey: "someValue"});
+    it("should return an empty array in case when server response is wrongly formatted", () => {
+        expect.assertions(1);
+        fetchMock.get(defaultProjectsUrl, {someKey: "someValue"});
 
-            return fetchProjects().then(actualResponse => {
-                const expectedResult = [];
-                expect(actualResponse).toEqual(expectedResult);
-            });
+        return fetchProjects().then(actualResponse => {
+            const expectedResult = [];
+            expect(actualResponse).toEqual(expectedResult);
         });
+    });
 
-        it("should throw an error when server returns an error status code", () => {
-            expect.assertions(1);
+    it("should throw an error when server returns an error status code", () => {
+        expect.assertions(1);
 
-            fetchMock.get(defaultProjectsUrl, {status: 503, body: getSampleServerResponse()});
-            return fetchProjects().catch(err => {
-                expect(err).toBeDefined();
-            });
+        fetchMock.get(defaultProjectsUrl, {status: 503, body: getSampleServerResponse()});
+        return fetchProjects().catch(err => {
+            expect(err).toBeDefined();
         });
     });
 
@@ -95,48 +93,6 @@ describe("Fetching projects", () => {
 
             return fetchProjects(requestParams).then(() => {
                 expect(fetchMock.called(expectedEndpoint)).toBe(true);
-            });
-        });
-    });
-
-    describe("single project", () => {
-        it("should return a single project", () => {
-            expect.assertions(1);
-            const projectId = "1231231";
-            const expectedEndpoint = `end:/api/projects/${projectId}.json`;
-
-            fetchMock.get(expectedEndpoint, getSampleServerResponse()[0]);
-
-            const expectedProject = getParsedProjects()[0];
-
-            return fetchProject(projectId).then(project => {
-                expect(project).toEqual(expectedProject);
-            });
-        });
-
-        it("should throw when project is not found", () => {
-            expect.assertions(1);
-
-            const projectId = "1231231";
-            const expectedEndpoint = `end:/api/projects/${projectId}.json`;
-
-            fetchMock.get(expectedEndpoint, {status: 404, body: "{}"});
-
-            return fetchProject(projectId).catch(err=> {
-                expect(err).toBeDefined();
-            });
-        });
-
-        it("should throw when error occurred on server side", () => {
-            expect.assertions(1);
-
-            const projectId = "1231231";
-            const expectedEndpoint = `end:/api/projects/${projectId}.json`;
-
-            fetchMock.get(expectedEndpoint, {status: 503, body: "{}"});
-
-            return fetchProject(projectId).catch(err=> {
-                expect(err).toBeDefined();
             });
         });
     });
