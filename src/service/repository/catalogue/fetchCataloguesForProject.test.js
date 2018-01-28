@@ -1,9 +1,11 @@
-import fetchMock from "fetch-mock";
-import {fetchCataloguesForProject} from "./catalogues";
-import Catalogue from "../../model/Catalogue";
-import Metadata from "../../model/Metadata";
+// @flow
 
-describe("Fetching project's catalogues", () => {
+import fetchMock from "fetch-mock";
+import fetchCataloguesForProject from "./fetchCataloguesForProject";
+import Metadata from "../../../model/Metadata";
+import Catalogue from "../../../model/Catalogue";
+
+describe("fetchCataloguesForProject", () => {
     beforeEach(() => {
         fetchMock.restore();
     });
