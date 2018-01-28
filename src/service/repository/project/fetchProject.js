@@ -1,3 +1,5 @@
+// @flow
+
 import "whatwg-fetch";
 import {API_URL} from "../../../constants";
 import Project from "../../../model/Project";
