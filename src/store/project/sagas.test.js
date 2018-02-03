@@ -2,11 +2,13 @@ import {expectSaga, testSaga} from "redux-saga-test-plan";
 import * as matchers from "redux-saga-test-plan/matchers";
 import {throwError} from "redux-saga-test-plan/providers";
 import {
+    addingProjectFailure,
+    addingProjectSuccess, addNewProject,
     failProjectListing, listProjects, selectProject, selectProjectFailure, selectProjectSuccess,
     setProjects, showProjectCatalogues
 } from "./actions";
-import watchProjects, {fetchProjectList, selectOrFetchProject} from "./sagas";
-import {fetchProject, fetchProjects} from "../../service/repository/project";
+import watchProjects, {addProject, fetchProjectList, selectOrFetchProject} from "./sagas";
+import {fetchProject, fetchProjects, createProject} from "../../service/repository/project";
 import {getProject} from "./../selectors";
 import {push} from "react-router-redux";
 import {select} from "redux-saga/effects";
@@ -107,6 +109,38 @@ describe("projects sagas", () => {
                     .next()
                     .isDone();
             });
+
+            it("should create a project", () => {
+                const name = "My project";
+                const availableLangs = ["pl", "en"];
+                const projectProps = {
+                    name, availableLangs
+                };
+
+                testSaga(addProject, {newProjectProperties: projectProps})
+                    .next()
+                    .call(createProject, name, availableLangs)
+                    .next()
+                    .put(addingProjectSuccess())
+                    .next()
+                    .isDone();
+            });
+
+            it("should fail when creating a project fails", () => {
+                const name = "My project";
+                const availableLangs = ["pl", "en"];
+                const projectProps = {
+                    name, availableLangs
+                };
+
+                testSaga(addProject, {newProjectProperties: projectProps})
+                    .next()
+                    .call(createProject, name, availableLangs)
+                    .throw()
+                    .put(addingProjectFailure())
+                    .next()
+                    .isDone();
+            });
         });
 
         describe("integration", () => {
@@ -162,6 +196,40 @@ describe("projects sagas", () => {
                     .put(selectProjectSuccess(foundProject))
                     .put(push(expectedUrl))
                     .dispatch(showProjectCatalogues(projectId))
+                    .silentRun();
+            });
+
+            it("should create a project", () => {
+                const name = "My project";
+                const availableLangs = ["pl", "en"];
+                const projectProps = {
+                    name,
+                    availableLangs
+                };
+
+                return expectSaga(watchProjects)
+                    .provide([
+                        [matchers.call.fn(createProject, name, availableLangs)]
+                    ])
+                    .put(addingProjectSuccess())
+                    .dispatch(addNewProject(projectProps))
+                    .silentRun();
+            });
+
+            it("should fail when creating a project fails", () => {
+                const name = "My project";
+                const availableLangs = ["pl", "en"];
+                const projectProps = {
+                    name,
+                    availableLangs
+                };
+
+                return expectSaga(watchProjects)
+                    .provide([
+                        [matchers.call.fn(createProject, name, availableLangs), throwError("Creating project failed")]
+                    ])
+                    .put(addingProjectFailure())
+                    .dispatch(addNewProject(projectProps))
                     .silentRun();
             });
         });
