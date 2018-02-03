@@ -1,4 +1,6 @@
 import {
+    ADD_NEW_PROJECT_FAILURE,
+    ADD_NEW_PROJECT_REQUESTED, ADD_NEW_PROJECT_SUCCESS,
     PROJECT_SELECTION_FAIL,
     PROJECT_SELECTION_REQUESTED, PROJECT_SELECTION_SUCCESS, PROJECTS_REQUEST_FAILURE, PROJECTS_REQUEST_SUCCESS,
     PROJECTS_REQUESTED, SHOW_PROJECT_CATALOGUES
@@ -8,7 +10,8 @@ export const initialState = {
     loading: false,
     items: [],
     error: false,
-    selectedProject: null
+    selectedProject: null,
+    newProjectProperties: null
 };
 
 const projects = (state = initialState, action) => {
@@ -61,6 +64,27 @@ const projects = (state = initialState, action) => {
             loading: false,
             error: false,
             selectedProject: null
+        };
+    case ADD_NEW_PROJECT_REQUESTED:
+        return {
+            ...state,
+            loading: true,
+            error: false,
+            newProjectProperties: action.newProjectProperties
+        };
+    case ADD_NEW_PROJECT_SUCCESS:
+        return {
+            ...state,
+            loading: false,
+            error: false,
+            newProjectProperties: null,
+        };
+    case ADD_NEW_PROJECT_FAILURE:
+        return {
+            ...state,
+            loading: false,
+            error: true,
+            newProjectProperties: null
         };
     default:
         return state;

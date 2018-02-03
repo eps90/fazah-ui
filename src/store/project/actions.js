@@ -5,6 +5,9 @@ export const PROJECT_SELECTION_REQUESTED = "PROJECT_SELECTION_REQUESTED";
 export const PROJECT_SELECTION_SUCCESS = "PROJECT_SELECTION_SUCCESS";
 export const PROJECT_SELECTION_FAIL = "PROJECT_SELECTION_FAIL";
 export const SHOW_PROJECT_CATALOGUES = "SHOW_PROJECT_CATALOGUES";
+export const ADD_NEW_PROJECT_REQUESTED = "ADD_NEW_PROJECT_REQUESTED";
+export const ADD_NEW_PROJECT_SUCCESS = "ADD_NEW_PROJECT_SUCCESS";
+export const ADD_NEW_PROJECT_FAILURE = "ADD_NEW_PROJECT_FAILURE";
 
 export function listProjects() {
     return {
@@ -49,5 +52,24 @@ export function showProjectCatalogues(projectId) {
     return {
         type: SHOW_PROJECT_CATALOGUES,
         projectId
+    };
+}
+
+export function addNewProject(newProjectProperties) {
+    return {
+        type: ADD_NEW_PROJECT_REQUESTED,
+        newProjectProperties
+    };
+}
+
+export function addingProjectSuccess() {
+    return {
+        type: ADD_NEW_PROJECT_SUCCESS
+    };
+}
+
+export function addingProjectFailure() {
+    return {
+        type: ADD_NEW_PROJECT_FAILURE
     };
 }
