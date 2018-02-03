@@ -56,11 +56,10 @@ export default class NewProject extends React.Component {
                         content="Please try again later"
                     />
                 }
-                <Form.Field required={true}>
-                    <label>Name</label>
-                    <input type="text" id="projectName" name="project_name" value={this.state.name}
-                        onChange={this.handleNameChange.bind(this)} />
-                </Form.Field>
+                <Form.Input required={true} id="projectName" name="project_name"
+                    label="Project name"
+                    value={this.state.name}
+                    onChange={this.handleNameChange.bind(this)} />
                 <Form.Field>
                     <label>Available languages</label>
                     <Dropdown multiple search selection options={this.props.languages}

@@ -9,13 +9,14 @@ describe("NewProject component", () => {
             const wrapper = shallow(createComponentUnderTest());
 
             expect(wrapper.find(Form)).toHaveLength(1);
-            expect(wrapper.find(Form.Field)).toHaveLength(2);
+            expect(wrapper.find(Form.Input)).toHaveLength(1);
+            expect(wrapper.find(Form.Field)).toHaveLength(1);
         });
 
         it("should show 'name' field as required", () => {
             const wrapper = shallow(createComponentUnderTest());
 
-            expect(wrapper.find(Form.Field).first().prop("required")).toBeTruthy();
+            expect(wrapper.find(Form.Input).first().prop("required")).toBeTruthy();
         });
 
         it("should display a spinner when the form is loading", () => {
