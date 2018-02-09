@@ -1,14 +1,11 @@
 import {fetchProject, fetchProjects} from "../../service/repository/project";
 import {call, put, select, takeLatest, all} from "redux-saga/effects";
 import {
-    ADD_NEW_PROJECT_REQUESTED, addingProjectFailure,
-    addingProjectSuccess,
     failProjectListing, PROJECT_SELECTION_REQUESTED, PROJECTS_REQUESTED, selectProjectFailure, selectProjectSuccess,
     setProjects, SHOW_PROJECT_CATALOGUES
 } from "./actions";
 import {getProject} from "./../selectors";
 import {push} from "react-router-redux";
-import createProject from "../../service/repository/project/createProject";
 
 export function* fetchProjectList() {
     try {
@@ -39,20 +36,10 @@ export function* openCataloguesForProject({projectId}) {
     yield put(push(cataloguesUrl));
 }
 
-export function* addProject({newProjectProperties}) {
-    try  {
-        yield call(createProject, newProjectProperties.name, newProjectProperties.availableLangs);
-        yield put(addingProjectSuccess());
-    } catch (e) {
-        yield put(addingProjectFailure());
-    }
-}
-
 export default function* watchProjects() {
     yield all([
         takeLatest(PROJECTS_REQUESTED, fetchProjectList),
         takeLatest(PROJECT_SELECTION_REQUESTED, selectOrFetchProject),
         takeLatest(SHOW_PROJECT_CATALOGUES, openCataloguesForProject),
-        takeLatest(ADD_NEW_PROJECT_REQUESTED, addProject)
     ]);
 }

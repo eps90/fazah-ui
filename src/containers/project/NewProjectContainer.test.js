@@ -40,7 +40,7 @@ describe("NewProjectContainer component", () => {
     function createComponentUnderTest(properties = {}) {
         const {loading = false, error = false, languages = []} = properties;
         const initialStore = {
-            projects: {
+            newProject: {
                 loading,
                 error
             }

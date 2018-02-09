@@ -1,7 +1,7 @@
 import React from "react";
 import NewProject from "../../components/project/new-project/NewProject";
 import {connect} from "react-redux";
-import {addNewProject} from "../../store/project/actions";
+import {addNewProject} from "../../store/newProject/actions";
 import PropTypes from "prop-types";
 import getLanguagesForDropdown from "../../service/languages/getLanguagesForDropdown";
 
@@ -18,8 +18,8 @@ NewProjectContainer.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        error: !!state.projects.error,
-        loading: !!state.projects.loading,
+        error: !!state.newProject.error,
+        loading: !!state.newProject.loading,
         languages: getLanguagesForDropdown()
     };
 };

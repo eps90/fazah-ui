@@ -1,6 +1,5 @@
 import projectsReducer, {initialState} from "./reducers";
 import {
-    addNewProject, addingProjectFailure, addingProjectSuccess,
     failProjectListing, listProjects, selectProject, selectProjectFailure, selectProjectSuccess,
     setProjects, showProjectCatalogues
 } from "./actions";
@@ -106,48 +105,6 @@ describe("project reducer", () => {
             };
             const actualState = projectsReducer(initialState, action);
 
-            expect(actualState).toEqual(expectedState);
-        });
-    });
-
-    describe("Creating a project", () => {
-        it("should set state on addNewProject reducer", () => {
-            const action = addNewProject({name: "My project"});
-            const expectedState = {
-                ...initialState,
-                error: false,
-                loading: true,
-                newProjectProperties: {
-                    name: "My project"
-                }
-            };
-            const actualState = projectsReducer(initialState, action);
-
-            expect(actualState).toEqual(expectedState);
-        });
-
-        it("should set state on addingProjectSuccess", () => {
-            const action = addingProjectSuccess();
-            const expectedState = {
-                ...initialState,
-                error: false,
-                loading: false,
-                newProjectProperties: null
-            };
-            const actualState = projectsReducer(initialState, action);
-
-            expect(actualState).toEqual(expectedState);
-        });
-
-        it("should set state on addingProjectFailure", () => {
-            const action = addingProjectFailure();
-            const expectedState = {
-                ...initialState,
-                error: true,
-                loading: false,
-                newProjectProperties: null
-            };
-            const actualState = projectsReducer(initialState, action);
             expect(actualState).toEqual(expectedState);
         });
     });
