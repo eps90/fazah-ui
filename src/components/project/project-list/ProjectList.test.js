@@ -4,6 +4,7 @@ import ProjectList from "./ProjectList";
 import ProjectListItem from "./ProjectListItem";
 import Project from "../../../model/Project";
 import {Dimmer, Message} from "semantic-ui-react";
+import NewProjectModal from "../new-project/NewProjectModal";
 
 describe("ProjectList component", () => {
     it("should render a list of provided projects", () => {
@@ -51,6 +52,15 @@ describe("ProjectList component", () => {
         expect(messageElement.props().negative).toBe(true);
     });
 
+    it("should show a new project button", () => {
+        expect.assertions(1);
+
+        const component = createComponentUnderTest();
+        const wrapper = shallow(component);
+
+        expect(wrapper.find(NewProjectModal)).toHaveLength(1);
+    });
+
     function getProjectsList() {
         return [
             new Project("id1", "Project 1"),
@@ -58,7 +68,7 @@ describe("ProjectList component", () => {
         ];
     }
 
-    function createComponentUnderTest(targetValues) {
+    function createComponentUnderTest(targetValues = {}) {
         const {
             listProjects = jest.fn(),
             showProjectCatalogues = jest.fn(),

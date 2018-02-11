@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import ProjectListItem from "./ProjectListItem";
 import Project from "../../../model/Project";
 import {Dimmer, Icon, List, Loader, Message, Segment} from "semantic-ui-react";
+import NewProjectModal from "../new-project/NewProjectModal";
 
 export default class ProjectList extends React.Component {
     static propTypes = {
@@ -46,6 +47,14 @@ export default class ProjectList extends React.Component {
                 <Dimmer active={this.props.loading} inverted>
                     <Loader size="big" />
                 </Dimmer>
+
+                <List size="large" verticalAlign="middle">
+                    <List.Item>
+                        <List.Content floated="right">
+                            <NewProjectModal />
+                        </List.Content>
+                    </List.Item>
+                </List>
 
                 {message}
 
