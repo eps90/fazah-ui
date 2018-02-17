@@ -1,24 +1,18 @@
 import React from "react";
 import {connect} from "react-redux";
 import {listCataloguesForProject} from "../../store/catalogue/actions";
-import PropTypes from "prop-types";
 import {withHeader} from "../../components/helper/withHeader";
 import {compose} from "redux";
 import Breadcrumbs from "../../components/layout/breadcrumb/Breadcrumbs";
 import LoadableCatalogueList from "../../components/catalogue/catalogue-list/LoadableCatalogueList";
+import CatalogueList from "../../components/catalogue/catalogue-list/CatalogueList";
 
 const CatalogueListContainer = ({catalogues, listCatalogues, loading, hasError, projectId}) => {
     return <LoadableCatalogueList catalogues={catalogues} listCatalogues={listCatalogues}
         loading={loading} hasError={hasError} projectId={projectId}  />;
 };
 
-CatalogueListContainer.propTypes = {
-    catalogues: PropTypes.array.isRequired,
-    listCatalogues: PropTypes.func.isRequired,
-    loading: PropTypes.bool,
-    hasError: PropTypes.bool,
-    projectId: PropTypes.string.isRequired
-};
+CatalogueListContainer.propTypes = CatalogueList.propTypes;
 
 const mapStateToProps = (state) => {
     const title = state.projects.selectedProject
