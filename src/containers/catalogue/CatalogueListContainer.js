@@ -4,11 +4,11 @@ import {listCataloguesForProject} from "../../store/catalogue/actions";
 import PropTypes from "prop-types";
 import {withHeader} from "../../components/helper/withHeader";
 import {compose} from "redux";
-import CatalogueList from "../../components/catalogue/catalogue-list/CatalogueList";
 import Breadcrumbs from "../../components/layout/breadcrumb/Breadcrumbs";
+import LoadableCatalogueList from "../../components/catalogue/catalogue-list/LoadableCatalogueList";
 
 const CatalogueListContainer = ({catalogues, listCatalogues, loading, hasError, projectId}) => {
-    return <CatalogueList catalogues={catalogues} listCatalogues={listCatalogues}
+    return <LoadableCatalogueList catalogues={catalogues} listCatalogues={listCatalogues}
         loading={loading} hasError={hasError} projectId={projectId}  />;
 };
 
