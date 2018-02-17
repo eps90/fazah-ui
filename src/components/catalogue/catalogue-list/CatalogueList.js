@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import CatalogueListItem from "./CatalogueListItem";
 import Catalogue from "../../../model/Catalogue";
-import {Dimmer, Icon, List, Loader, Message} from "semantic-ui-react";
+import {List} from "semantic-ui-react";
 
 export default class CatalogueList extends React.Component {
     static propTypes = {
@@ -23,39 +23,14 @@ export default class CatalogueList extends React.Component {
     }
 
     render() {
-        let message = "";
-        if (this.props.hasError) {
-            message = (
-                <Message negative icon>
-                    <Icon name="exclamation triangle" />
-                    <Message.Header>Error occurred when fetching catalogues</Message.Header>
-                </Message>
-            );
-        } else if (!this.props.loading && this.props.catalogues.length === 0) {
-            message = (
-                <Message info icon>
-                    <Icon name="info" />
-                    <Message.Header>No catalogues to show</Message.Header>
-                </Message>
-            );
-        }
-
         return (
-            <Dimmer.Dimmable dimmed={this.props.loading}>
-                <Dimmer active={this.props.loading} inverted>
-                    <Loader size="big" />
-                </Dimmer>
-
-                {message}
-
-                <List selection relaxed size="big" verticalAlign="middle">
-                    {this.props.catalogues.map(catalogue => (
-                        <List.Item key={catalogue.id}>
-                            <CatalogueListItem catalogue={catalogue}/>
-                        </List.Item>
-                    ))}
-                </List>
-            </Dimmer.Dimmable>
+            <List selection relaxed size="big" verticalAlign="middle">
+                {this.props.catalogues.map(catalogue => (
+                    <List.Item key={catalogue.id}>
+                        <CatalogueListItem catalogue={catalogue}/>
+                    </List.Item>
+                ))}
+            </List>
         );
     }
 }
