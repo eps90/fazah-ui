@@ -7,9 +7,9 @@ import Breadcrumbs from "../../components/layout/breadcrumb/Breadcrumbs";
 import LoadableCatalogueList from "../../components/catalogue/catalogue-list/LoadableCatalogueList";
 import CatalogueList from "../../components/catalogue/catalogue-list/CatalogueList";
 
-const CatalogueListContainer = ({catalogues, listCatalogues, loading, hasError, projectId}) => {
+const CatalogueListContainer = ({catalogues, listCatalogues, loading, hasError, projectId, ...props}) => {
     return <LoadableCatalogueList catalogues={catalogues} listCatalogues={listCatalogues}
-        loading={loading} hasError={hasError} projectId={projectId}  />;
+        loading={loading} hasError={hasError} projectId={projectId} {...props} />;
 };
 
 CatalogueListContainer.propTypes = CatalogueList.propTypes;
