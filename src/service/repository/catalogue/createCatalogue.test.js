@@ -14,7 +14,7 @@ describe("createCatalogue", () => {
 
         const catalogueName = "My new catalogue";
         const projectId = "ca2da12d-90f6-4dac-9a0a-143da30b9afa";
-        const expectedUrl = "end:/catalogues.json";
+        const expectedUrl = "end:/api/catalogues.json";
         const expectedBody = {
             project_id: projectId,
             name: catalogueName
@@ -37,7 +37,7 @@ describe("createCatalogue", () => {
         const catalogueName = "My new catalogue";
         const projectId = "ca2da12d-90f6-4dac-9a0a-143da30b9afa";
         const parentCatalogueId = "b2e4139e-ee25-462d-a4d6-54260c8bde52";
-        const expectedUrl = "end:/catalogues.json";
+        const expectedUrl = "end:/api/catalogues.json";
         const expectedBody = {
             project_id: projectId,
             name: catalogueName,
@@ -60,7 +60,7 @@ describe("createCatalogue", () => {
 
         const catalogueName = "My new catalogue";
         const projectId = "ca2da12d-90f6-4dac-9a0a-143da30b9afa";
-        const expectedUrl = "end:/catalogues.json";
+        const expectedUrl = "end:/api/catalogues.json";
 
         fetchMock.post(expectedUrl, 503);
 

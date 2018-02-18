@@ -3,7 +3,7 @@ import "whatwg-fetch";
 import {API_URL} from "../../../constants";
 
 export default function createCatalogue(name: string, projectId: string, parentCatalogueId: string = null) {
-    const url = `${API_URL}/catalogues.json`;
+    const url = `${API_URL}/api/catalogues.json`;
     const body = {
         name,
         project_id: projectId
