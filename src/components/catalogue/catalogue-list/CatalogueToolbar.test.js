@@ -76,6 +76,25 @@ describe("CatalogueToolbar component", () => {
         expect(addNewCatalogue).toHaveBeenCalledWith({projectId, name: catalogueName, parentId});
     });
 
+    it("should go back to initial state after submission", () => {
+        const projectId = "05e7f38c-75a3-4e0a-8390-36fc429ff9ca";
+        const addNewCatalogue = jest.fn();
+        const wrapper = shallow(getComponentUnderTest({projectId, addNewCatalogue}));
+        clickNewCatalogueBtn(wrapper);
+
+        const catalogueName = "My new awesome catalogue";
+        const catalogueNameInput = wrapper.find(Input);
+        catalogueNameInput.simulate("change", {
+            target: {
+                value: catalogueName
+            }
+        });
+        catalogueNameInput.simulate("keyDown", {key: "Enter", keyCode: 13});
+
+        expect(wrapper.find(Input)).toHaveLength(0);
+        expect(wrapper.find(Button)).toHaveLength(1);
+    });
+
     it("should back to initial state when escape is pressed", () => {
         const projectId = "05e7f38c-75a3-4e0a-8390-36fc429ff9ca";
         const addNewCatalogue = jest.fn();

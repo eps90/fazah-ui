@@ -43,12 +43,17 @@ export default class CatalogueToolbar extends React.Component {
                 parentId: this.props.parentId,
                 name: this.state.catalogueName
             });
+            this.reset();
         } else if (event.key === "Escape") {
-            this.setState({
-                catalogueName: "",
-                inputShown: false
-            });
+            this.reset();
         }
+    }
+
+    reset() {
+        this.setState({
+            catalogueName: "",
+            inputShown: false
+        });
     }
 
     render() {
