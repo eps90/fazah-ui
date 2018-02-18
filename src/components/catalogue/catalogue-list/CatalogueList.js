@@ -26,9 +26,12 @@ export default class CatalogueList extends React.Component {
     render() {
         return (
             <List selection relaxed size="big" verticalAlign="middle">
-                <List.Item>
-                    {this.props.toolbar && this.props.toolbar}
-                </List.Item>
+                {this.props.toolbar &&
+                    <List.Item>
+                        {this.props.toolbar}
+                    </List.Item>
+                }
+
                 {this.props.catalogues.map(catalogue => (
                     <List.Item key={catalogue.id}>
                         <CatalogueListItem catalogue={catalogue}/>
