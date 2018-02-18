@@ -10,7 +10,8 @@ export default class CatalogueList extends React.Component {
         loading: PropTypes.bool,
         hasError: PropTypes.bool,
         catalogues: PropTypes.arrayOf(PropTypes.instanceOf(Catalogue)),
-        projectId: PropTypes.string
+        projectId: PropTypes.string,
+        toolbar: PropTypes.element
     };
 
     static defaultProps = {
@@ -25,6 +26,9 @@ export default class CatalogueList extends React.Component {
     render() {
         return (
             <List selection relaxed size="big" verticalAlign="middle">
+                <List.Item>
+                    {this.props.toolbar && this.props.toolbar}
+                </List.Item>
                 {this.props.catalogues.map(catalogue => (
                     <List.Item key={catalogue.id}>
                         <CatalogueListItem catalogue={catalogue}/>

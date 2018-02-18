@@ -23,6 +23,16 @@ describe("CatalogueList component", () => {
         expect(listCataloguesFn).toHaveBeenCalledWith(projectId);
     });
 
+    it("should allow to add toolbar component", () => {
+        expect.assertions(1);
+
+        const listCatalogues = jest.fn();
+        const toolbar = <TestToolbar />;
+        const wrapper = shallow(<CatalogueList listCatalogues={listCatalogues} toolbar={toolbar}/>);
+
+        expect(wrapper.find(TestToolbar)).toHaveLength(1);
+    });
+
     function getCataloguesList() {
         return [
             new Catalogue("id1", "Catalogue 1"),
@@ -30,3 +40,7 @@ describe("CatalogueList component", () => {
         ];
     }
 });
+
+const TestToolbar = () => (
+    <h1>Hello from toolbar!</h1>
+);
