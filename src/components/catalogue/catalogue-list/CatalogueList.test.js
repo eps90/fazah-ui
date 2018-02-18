@@ -7,8 +7,7 @@ import CatalogueListItem from "./CatalogueListItem";
 describe("CatalogueList component", () => {
     it("should render a list of provided catalogues", () => {
         const catalogues = getCataloguesList();
-        const listCataloguesFn = jest.fn();
-        const wrapper = shallow(<CatalogueList catalogues={catalogues} listCatalogues={listCataloguesFn} />);
+        const wrapper = shallow(getComponentUnderTest({catalogues}));
         expect(wrapper.find(CatalogueListItem)).toHaveLength(2);
     });
 
@@ -16,9 +15,8 @@ describe("CatalogueList component", () => {
         expect.assertions(1);
 
         const listCataloguesFn = jest.fn();
-        const catalogues = [];
         const projectId = "312312";
-        mount(<CatalogueList projectId={projectId} projects={catalogues} listCatalogues={listCataloguesFn} />);
+        mount(getComponentUnderTest({listCatalogues: listCataloguesFn, projectId}));
 
         expect(listCataloguesFn).toHaveBeenCalledWith(projectId);
     });
@@ -26,12 +24,22 @@ describe("CatalogueList component", () => {
     it("should allow to add toolbar component", () => {
         expect.assertions(1);
 
-        const listCatalogues = jest.fn();
         const toolbar = <TestToolbar />;
-        const wrapper = shallow(<CatalogueList listCatalogues={listCatalogues} toolbar={toolbar}/>);
+        const wrapper = shallow(getComponentUnderTest({toolbar}));
 
         expect(wrapper.find(TestToolbar)).toHaveLength(1);
     });
+
+    function getComponentUnderTest(properties = {}) {
+        const {
+            projectId = "",
+            listCatalogues = jest.fn(),
+            toolbar = undefined,
+            catalogues = []
+        } = properties;
+        return <CatalogueList projectId={projectId} listCatalogues={listCatalogues} toolbar={toolbar}
+            catalogues={catalogues}/>;
+    }
 
     function getCataloguesList() {
         return [
